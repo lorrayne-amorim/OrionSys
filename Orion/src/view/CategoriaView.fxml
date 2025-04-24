@@ -30,6 +30,7 @@
             <columns>
                 <TableColumn fx:id="colNome" prefWidth="150" text="Nome" />
                 <TableColumn fx:id="colTipo" prefWidth="150" text="Tipo" />
+            <TableColumn fx:id="colDescricao" prefWidth="243.0" text="Descrição" />
             </columns>
         </TableView>
       <Label layoutX="174.0" layoutY="14.0" text="CADASTRO DE CATEGORIAS">

@@ -19,6 +19,7 @@ public class CategoriaController {
     @FXML private TableView<Categoria> tabelaCategoria;
     @FXML private TableColumn<Categoria, String> colNome;
     @FXML private TableColumn<Categoria, String> colTipo;
+    @FXML private TableColumn<Categoria, String> colDescricao;
 
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
     private ObservableList<Categoria> listaCategorias;
@@ -30,6 +31,7 @@ public class CategoriaController {
 
         colNome.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
         colTipo.setCellValueFactory(cellData -> cellData.getValue().tipoProperty());
+        colDescricao.setCellValueFactory(cellData -> cellData.getValue().descricaoProperty());
 
         tabelaCategoria.getSelectionModel().selectedItemProperty().addListener(
             (observable, oldValue, newValue) -> selecionarCategoria(newValue)
