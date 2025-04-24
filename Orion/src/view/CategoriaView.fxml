@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="491.0" prefWidth="588.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CategoriaController">
+    <children>
+        <Label layoutX="26.0" layoutY="51.0" text="Nome:" />
+        <TextField fx:id="txtNome" layoutX="83.0" layoutY="47.0" prefHeight="25.0" prefWidth="472.0" />
+
+        <Label layoutX="31.0" layoutY="87.0" text="Tipo:" />
+        <ComboBox fx:id="comboTipo" layoutX="83.0" layoutY="83.0" prefHeight="25.0" prefWidth="472.0" />
+
+        <Label layoutX="17.0" layoutY="124.0" text="Descrição:" />
+        <TextField fx:id="txtDescricao" layoutX="83.0" layoutY="120.0" prefHeight="25.0" prefWidth="472.0" />
+
+        <CheckBox fx:id="checkAtivo" layoutX="17.0" layoutY="167.0" text="Ativo" />
+
+        <Button layoutX="428.0" layoutY="392.0" onAction="#salvarCategoria" text="Salvar" />
+        <Button layoutX="486.0" layoutY="392.0" onAction="#removerCategoria" text="Remover" />
+    
+        <TableView fx:id="tabelaCategoria" layoutX="14.0" layoutY="200.0" prefHeight="179.0" prefWidth="544.0">
+            <columns>
+                <TableColumn fx:id="colNome" prefWidth="150" text="Nome" />
+                <TableColumn fx:id="colTipo" prefWidth="150" text="Tipo" />
+            </columns>
+        </TableView>
+      <Label layoutX="174.0" layoutY="14.0" text="CADASTRO DE CATEGORIAS">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
