@@ -35,8 +35,8 @@ public class TransacaoController {
 
     private void configurarTabela() {
         colData.setCellValueFactory(new PropertyValueFactory<>("data"));
-        colCategoria.setCellValueFactory(new PropertyValueFactory<>("idCategoria")); // pode ser alterado se tiver nome da categoria
-        colLocal.setCellValueFactory(new PropertyValueFactory<>("idLocal"));         // idem para local
+        colCategoria.setCellValueFactory(new PropertyValueFactory<>("nomeCategoria"));
+        colLocal.setCellValueFactory(new PropertyValueFactory<>("nomeLocal"));
         colValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
     }
 

@@ -1,5 +1,7 @@
 package model;
 
+// @author lorrayne
+
 import javafx.beans.property.*;
 
 public class Categoria {
