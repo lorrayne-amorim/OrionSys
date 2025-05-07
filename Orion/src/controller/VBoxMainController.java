@@ -17,7 +17,7 @@ public class VBoxMainController implements Initializable {
     private MenuItem menuItemCadastroCategoria;
     
     @FXML
-    private MenuItem menuItemCadastroMetaFinanceira;
+    private MenuItem menuItemCadastroOrcamento;
     
     //ESSES MENUS AINDA IREMOS MUDAR EM 
     @FXML
@@ -46,8 +46,8 @@ public class VBoxMainController implements Initializable {
     }
     
     @FXML
-    public void handleMenuItemCadastroMetaFinanceira() throws IOException {
-        AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/MetaFinanceiraView.fxml"));
+    public void handleMenuItemCadastroOrcamento() throws IOException {
+        AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrcamentoView.fxml"));
         anchorPane.getChildren().setAll(b);
     }
     
