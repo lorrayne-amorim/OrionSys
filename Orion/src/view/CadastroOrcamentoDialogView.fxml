@@ -8,11 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" 
-    xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1"
-    fx:controller="controller.CadastroOrcamentoDialogController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroOrcamentoDialogController">
    <children>
-      <Label layoutX="231.0" layoutY="34.0" prefHeight="27.0" prefWidth="139.0" text="Orçamento">
+      <Label layoutX="231.0" layoutY="27.0" prefHeight="27.0" prefWidth="139.0" text="Orçamento">
          <font><Font name="System Bold" size="18.0" /></font>
       </Label>
       
@@ -36,8 +34,8 @@
       </Label>
       <DatePicker fx:id="dataFim" layoutX="343.0" layoutY="215.0" prefHeight="25.0" prefWidth="158.0" />
 
-      <Button layoutX="372.0" layoutY="299.0" mnemonicParsing="false" text="Salvar" onAction="#handleConfirmar"/>
-      <Button layoutX="431.0" layoutY="299.0" mnemonicParsing="false" text="Cancelar" onAction="#handleCancelar"/>
+      <Button layoutX="372.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleConfirmar" text="Salvar" />
+      <Button layoutX="431.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleCancelar" text="Cancelar" />
       
    </children>
 </AnchorPane>
