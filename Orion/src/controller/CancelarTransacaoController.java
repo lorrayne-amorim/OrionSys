@@ -1,13 +1,13 @@
 package controller;
 
 // @author lorrayne
-import dao.TransacaoDAO;
+import model.dao.TransacaoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Transacao;
+import model.domain.Transacao;
 
 import java.util.List;
 

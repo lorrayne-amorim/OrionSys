@@ -21,7 +21,7 @@ public class VBoxMainController implements Initializable {
     
     //ESSES MENUS AINDA IREMOS MUDAR EM 
     @FXML
-    private MenuItem menuItemProcessosVendas;
+    private MenuItem menuItemTransacao;
     
     @FXML
     private MenuItem menuItemGraficosVendasPorMes;

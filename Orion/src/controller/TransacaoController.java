@@ -1,6 +1,6 @@
 package controller;
 
-import dao.TransacaoDAO;
+import model.dao.TransacaoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
-import model.Transacao;
+import model.domain.Transacao;
 
 import java.io.IOException;
 import java.util.List;

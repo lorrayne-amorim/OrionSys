@@ -1,7 +1,7 @@
 package controller;
 
 import model.dao.CategoriaDAO;
-import dao.TransacaoDAO;
+import model.dao.TransacaoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.domain.Categoria;
-import model.Transacao;
+import model.domain.Transacao;
 
 import java.math.BigDecimal;
 import java.sql.*;
