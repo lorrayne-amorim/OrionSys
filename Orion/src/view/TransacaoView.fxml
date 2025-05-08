@@ -9,23 +9,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="631.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.TransacaoController">
+<AnchorPane prefHeight="631.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TransacaoController">
     <VBox spacing="15">
 
         <HBox alignment="CENTER_RIGHT" spacing="10" />
 
     </VBox>
 
-     <TableView fx:id="tabelaTransacoes" layoutX="78.0" layoutY="94.0" prefHeight="429.0" prefWidth="774.0">
+     <TableView fx:id="tabelaTransacoes" layoutX="24.0" layoutY="94.0" prefHeight="429.0" prefWidth="846.0">
          <columns>
-             <TableColumn fx:id="colData" prefWidth="169.0" text="Data" />
-             <TableColumn fx:id="colCategoria" prefWidth="186.0" text="Categoria" />
-             <TableColumn fx:id="colLocal" prefWidth="215.0" text="Local" />
-             <TableColumn fx:id="colValor" minWidth="0.0" prefWidth="203.0" text="Valor (R$)" />
+             <TableColumn fx:id="colData" prefWidth="140.0" text="Data" />
+             <TableColumn fx:id="colCategoria" prefWidth="155.0" text="Categoria" />
+             <TableColumn fx:id="colLocal" prefWidth="178.0" text="Local" />
+         <TableColumn fx:id="colFormaPagamento" minWidth="0.0" prefWidth="197.0" text="Forma de Pagamento" />
+             <TableColumn fx:id="colValor" minWidth="0.0" prefWidth="175.0" text="Valor (R$)" />
          </columns>
      </TableView>
-      <Button layoutX="734.0" layoutY="537.0" onAction="#abrirCancelarTransacao" text="Cancelar Transação" />
-      <Button layoutX="618.0" layoutY="537.0" onAction="#abrirInserirTransacao" text="Inserir Transação" />
+      <Button layoutX="734.0" layoutY="537.0" onAction="#handleCancelar" text="Cancelar Transação" />
+      <Button layoutX="618.0" layoutY="537.0" onAction="#handleInserir" text="Inserir Transação" />
 
      <Label layoutX="385.0" layoutY="42.0" text="Minhas Transações">
       <font>

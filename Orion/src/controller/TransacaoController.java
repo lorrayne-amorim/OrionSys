@@ -1,16 +1,16 @@
 package controller;
 
-import model.dao.TransacaoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import model.dao.TransacaoDAO;
 import model.domain.Transacao;
 
 import java.io.IOException;
@@ -41,38 +41,83 @@ public class TransacaoController {
     }
 
     private void carregarTransacoes() {
-        try {
-            List<Transacao> transacoes = transacaoDAO.listarTodos(); // você deve implementar esse método depois
-            listaTransacoes = FXCollections.observableArrayList(transacoes);
-            tabelaTransacoes.setItems(listaTransacoes);
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<Transacao> transacoes = transacaoDAO.listarTodos();
+        listaTransacoes = FXCollections.observableArrayList(transacoes);
+        tabelaTransacoes.setItems(listaTransacoes);
+    }
+
+    @FXML
+    public void handleInserir() {
+        abrirFormularioTransacao(null);
+        carregarTransacoes();
+    }
+
+    @FXML
+    public void handleEditar() {
+        Transacao selecionada = tabelaTransacoes.getSelectionModel().getSelectedItem();
+        if (selecionada != null) {
+            abrirFormularioTransacao(selecionada);
+            carregarTransacoes();
+        } else {
+            mostrarAlerta("Selecione uma transação para editar.");
         }
     }
 
     @FXML
-    public void abrirInserirTransacao() {
-        abrirJanelaModal("/view/InserirTransacaoView.fxml", "Nova Transação");
-        carregarTransacoes(); // recarrega após fechar
+    public void handleCancelar() {
+        Transacao selecionada = tabelaTransacoes.getSelectionModel().getSelectedItem();
+        if (selecionada != null) {
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Cancelar Transação");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Tem certeza que deseja cancelar esta transação?");
+            if (alerta.showAndWait().get() == ButtonType.OK) {
+                boolean sucesso = transacaoDAO.cancelarTransacao(selecionada.getId());
+                if (sucesso) {
+                    mostrarInfo("Transação cancelada com sucesso.");
+                    carregarTransacoes();
+                } else {
+                    mostrarAlerta("Erro ao cancelar transação.");
+                }
+            }
+        } else {
+            mostrarAlerta("Selecione uma transação para cancelar.");
+        }
     }
 
-    @FXML
-    public void abrirCancelarTransacao() {
-        abrirJanelaModal("/view/CancelarTransacaoView.fxml", "Cancelar Transação");
-        carregarTransacoes(); // recarrega após fechar
-    }
-
-    private void abrirJanelaModal(String caminhoFXML, String titulo) {
+    private void abrirFormularioTransacao(Transacao transacao) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(caminhoFXML));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle(titulo);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/InserirTransacaoView.fxml"));
+            AnchorPane page = loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(transacao == null ? "Inserir Transação" : "Editar Transação");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.setScene(new Scene(page));
+
+            InserirTransacaoController controller = loader.getController();
+            if (transacao != null) {
+                controller.preencherFormulario(transacao);
+            }
+
+            dialogStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void mostrarAlerta(String msg) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Atenção");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+
+    private void mostrarInfo(String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Informação");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 }

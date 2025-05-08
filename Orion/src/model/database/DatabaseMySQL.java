@@ -21,7 +21,7 @@ public class DatabaseMySQL implements Database {
             this.connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/orionsys", "postgres","123");
             return this.connection;
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(DatabasePostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseMySQL.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -29,9 +29,11 @@ public class DatabaseMySQL implements Database {
     @Override
     public void desconectar(Connection connection) {
         try {
-            connection.close();
+            if(connection != null && !connection.isClosed()){
+                connection.close();
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(DatabasePostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseMySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -5,6 +5,7 @@ package controller;
 import model.dao.OrcamentoDAO;
 import model.database.Database;
 import model.database.DatabaseFactory;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,8 +112,12 @@ public class CadastroOrcamentoController implements Initializable {
     public void handleRemover() {
         Orcamento selecionado = tableViewOrcamentos.getSelectionModel().getSelectedItem();
         if (selecionado != null) {
-            orcamentoDAO.remover(selecionado);
-            carregarTabela();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Deseja realmente excluir o orçamento selecionado?", ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> result = confirm.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.YES) {
+                orcamentoDAO.remover(selecionado);
+                carregarTabela();
+            }
         } else {
             mostrarAlerta("Seleção necessária", "Por favor, selecione um orçamento para remover.");
         }
@@ -134,7 +139,8 @@ public class CadastroOrcamentoController implements Initializable {
             controller.setOrcamento(orcamento); 
 
             dialogStage.showAndWait();
-            return true; // por enquanto sempre retorna true
+            return controller.isConfirmado();
+           
         } catch (IOException e) {
             e.printStackTrace();
             return false;

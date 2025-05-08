@@ -122,4 +122,8 @@ public class CategoriaDAO {
     }
 
     //Talvez colocar as regras de negocio aqui...
+
+    public Categoria buscarPorId(int idCategoria) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

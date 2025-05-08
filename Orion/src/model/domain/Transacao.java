@@ -11,6 +11,7 @@ public class Transacao {
     private int idLocal;
     private String nomeLocal;
     private BigDecimal valor;
+    private String formaPagamento;
     private LocalDateTime data;
 
     public Transacao() {}
@@ -86,5 +87,13 @@ public class Transacao {
 
     public void setData(LocalDateTime data) {
         this.data = data;
+    }
+
+    public String getFormaPagamento(){
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento){
+        this.formaPagamento = formaPagamento;
     }
 }

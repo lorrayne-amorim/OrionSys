@@ -167,4 +167,51 @@ public class TransacaoDAO {
             }
         }
     }
+
+    public boolean ultrapassaOrcamento(Transacao transacao) {
+        String sql = "SELECT valor_limite, (SELECT COALESCE(SUM(valor), 0) FROM transacao " +
+                     "WHERE id_categoria = o.id_categoria AND data BETWEEN o.data_inicio AND o.data_fim) AS total_utilizado " +
+                     "FROM orcamento o WHERE id_categoria = ? AND ? BETWEEN o.data_inicio AND o.data_fim";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, transacao.getIdCategoria());
+            stmt.setTimestamp(2, Timestamp.valueOf(transacao.getData()));
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                BigDecimal limite = rs.getBigDecimal("valor_limite");
+                BigDecimal utilizado = rs.getBigDecimal("total_utilizado");
+                return utilizado.add(transacao.getValor()).compareTo(limite) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public BigDecimal calcularSaldoAvista() {
+        try {
+            PreparedStatement stmtReceitas = connection.prepareStatement(
+                "SELECT COALESCE(SUM(valor), 0) AS total FROM transacao " +
+                "WHERE forma_pagamento = 'avista' AND id_categoria IN (" +
+                "SELECT id_categoria FROM categoria WHERE tipo = 'receita')"
+            );
+            ResultSet rsReceitas = stmtReceitas.executeQuery();
+            rsReceitas.next();
+            BigDecimal receitas = rsReceitas.getBigDecimal("total");
+    
+            PreparedStatement stmtDespesas = connection.prepareStatement(
+                "SELECT COALESCE(SUM(valor), 0) AS total FROM transacao " +
+                "WHERE forma_pagamento = 'avista' AND id_categoria IN (" +
+                "SELECT id_categoria FROM categoria WHERE tipo = 'despesa')"
+            );
+            ResultSet rsDespesas = stmtDespesas.executeQuery();
+            rsDespesas.next();
+            BigDecimal despesas = rsDespesas.getBigDecimal("total");
+    
+            return receitas.subtract(despesas);
+    
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return BigDecimal.ZERO;
+        }
+    }
 }

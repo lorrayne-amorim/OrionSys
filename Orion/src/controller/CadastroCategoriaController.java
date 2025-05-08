@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import javafx.fxml.Initializable;
 import java.util.ResourceBundle;
 import java.net.URL;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 public class CadastroCategoriaController implements Initializable {
@@ -112,8 +113,14 @@ public class CadastroCategoriaController implements Initializable {
     public void handleRemover() {
         Categoria selecionada = tableViewCategorias.getSelectionModel().getSelectedItem();
         if (selecionada != null) {
-            categoriaDAO.remover(selecionada);
-            carregarTabela();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Confirmar exclusão");
+            confirm.setHeaderText("Tem certeza que deseja excluir?");
+            Optional<ButtonType> result = confirm.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                categoriaDAO.remover(selecionada);
+                carregarTabela();
+            }
         } else {
             mostrarAlerta("Seleção necessária", "Por favor, selecione uma categoria para remover.");
         }

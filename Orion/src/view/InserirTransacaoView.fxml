@@ -40,4 +40,11 @@
             <TextField fx:id="txtValor" layoutX="60.0" prefWidth="250" />
       </children>
    </Group>
+   <Group>
+      <children>
+      <Label layoutX="35.0" layoutY="190.0" text="Forma de Pagamento:" />
+      <ComboBox fx:id="comboFormaPagamento" layoutX="180.0" layoutY="186.0" prefWidth="200.0" />
+       </children>
+   </Group>
+
 </AnchorPane>
