@@ -1,0 +1,60 @@
+-- Script completo para PostgreSQL
+
+-- 1. Tabela de categorias
+CREATE TABLE categoria (
+    id_categoria SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('receita', 'despesa')),
+    descricao TEXT,
+    prioridade VARCHAR(10) DEFAULT 'Média' CHECK (prioridade IN ('Alta', 'Média', 'Baixa')),
+    recorrente BOOLEAN DEFAULT FALSE
+);
+
+-- 2. Tabela de locais de transação
+CREATE TABLE local_transacao (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+-- 3. Tabela de orçamentos
+CREATE TABLE orcamento (
+    id_orcamento SERIAL PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    categoria VARCHAR(100) NOT NULL,
+    valor_limite NUMERIC(10,2) NOT NULL CHECK (valor_limite >= 0),
+    data_inicio DATE NOT NULL,
+    data_fim DATE NOT NULL
+);
+
+-- 4. Tabela de transações
+CREATE TABLE transacao (
+    id SERIAL PRIMARY KEY,
+    id_categoria INTEGER NOT NULL REFERENCES categoria(id_categoria),
+    id_local INTEGER NOT NULL REFERENCES local_transacao(id),
+    valor NUMERIC(10,2) NOT NULL CHECK (valor >= 0),
+    forma_pagamento VARCHAR(20),
+    data TIMESTAMP NOT NULL
+);
+
+-- Inserts de exemplo
+
+-- Categorias
+INSERT INTO categoria (nome, tipo, descricao, prioridade, recorrente) VALUES
+('Salário', 'receita', 'Recebimento mensal da empresa', 'Alta', TRUE),
+('Supermercado', 'despesa', 'Gastos com compras do mês', 'Alta', TRUE),
+('Lazer', 'despesa', 'Cinema, viagens, etc.', 'Média', FALSE),
+('Freelas', 'receita', 'Trabalhos por fora', 'Média', FALSE);
+
+-- Locais de transação
+INSERT INTO local_transacao (nome) VALUES
+('Empresa XYZ'),
+('Supermercado Vitória'),
+('Cinema Central'),
+('Farmácia Saúde');
+
+-- Orçamentos
+INSERT INTO orcamento (titulo, categoria, valor_limite, data_inicio, data_fim) VALUES
+('Orçamento Supermercado Maio', 'Supermercado', 1000.00, '2025-05-01', '2025-05-31'),
+('Orçamento Lazer Maio', 'Lazer', 500.00, '2025-05-01', '2025-05-31');
+
+
