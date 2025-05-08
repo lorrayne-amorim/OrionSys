@@ -10,14 +10,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" 
     xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1"
-    fx:controller="controller.MetaFinanceiraController">
+    fx:controller="controller.CadastroOrcamentoDialogController">
    <children>
-      <Label layoutX="231.0" layoutY="34.0" prefHeight="27.0" prefWidth="139.0" text="Meta Financeira">
+      <Label layoutX="231.0" layoutY="34.0" prefHeight="27.0" prefWidth="139.0" text="Orçamento">
          <font><Font name="System Bold" size="18.0" /></font>
       </Label>
       
-      <Label layoutX="35.0" layoutY="80.0" text="Objetivo da Meta:" />
-      <TextField fx:id="txtObjetivo" layoutX="165.0" layoutY="76.0" prefHeight="25.0" prefWidth="337.0" />
+      <Label layoutX="35.0" layoutY="80.0" text="Título:" />
+      <TextField fx:id="txtTitulo" layoutX="165.0" layoutY="76.0" prefHeight="25.0" prefWidth="337.0" />
 
       <Label layoutX="35.0" layoutY="118.0" text="Selecione a categoria:" />
       <ComboBox fx:id="comboCategoria" layoutX="166.0" layoutY="115.0" prefHeight="25.0" prefWidth="337.0" />
@@ -36,8 +36,8 @@
       </Label>
       <DatePicker fx:id="dataFim" layoutX="343.0" layoutY="215.0" prefHeight="25.0" prefWidth="158.0" />
 
-      <Button layoutX="372.0" layoutY="299.0" mnemonicParsing="false" text="Salvar" onAction="#salvarMeta"/>
-      <Button layoutX="431.0" layoutY="299.0" mnemonicParsing="false" text="Editar" onAction="#editarMeta"/>
-      <Button layoutX="489.0" layoutY="299.0" mnemonicParsing="false" text="Excluir" onAction="#excluirMeta"/>
+      <Button layoutX="372.0" layoutY="299.0" mnemonicParsing="false" text="Salvar" onAction="#handleConfirmar"/>
+      <Button layoutX="431.0" layoutY="299.0" mnemonicParsing="false" text="Cancelar" onAction="#handleCancelar"/>
+      
    </children>
 </AnchorPane>

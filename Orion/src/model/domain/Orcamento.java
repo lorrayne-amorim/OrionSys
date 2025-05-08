@@ -1,71 +1,80 @@
-package model;
+package model.domain;
 
-import javafx.beans.property.*;
 import java.time.LocalDate;
 
 public class Orcamento {
 
-    private final IntegerProperty id = new SimpleIntegerProperty();
-    private final StringProperty objetivo = new SimpleStringProperty();
-    private final StringProperty categoria = new SimpleStringProperty();
-    private final DoubleProperty valorLimite = new SimpleDoubleProperty();
-    private final ObjectProperty<LocalDate> dataInicio = new SimpleObjectProperty<>();
-    private final ObjectProperty<LocalDate> dataFim = new SimpleObjectProperty<>();
+    private int id_orcamento;
+    private String titulo;
+    private String categoria;
+    private double valorLimite;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
 
     // Construtores
     public Orcamento() {}
 
-    public Orcamento(int id, String objetivo, String categoria, double valorLimite, LocalDate dataInicio, LocalDate dataFim) {
-        this.id.set(id);
-        this.objetivo.set(objetivo);
-        this.categoria.set(categoria);
-        this.valorLimite.set(valorLimite);
-        this.dataInicio.set(dataInicio);
-        this.dataFim.set(dataFim);
+    public Orcamento(int id_orcamento, String titulo, String categoria, double valorLimite, LocalDate dataInicio, LocalDate dataFim) {
+        this.id_orcamento = id_orcamento;
+        this.titulo = titulo;
+        this.categoria = categoria;
+        this.valorLimite = valorLimite;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
     }
 
-    public Orcamento(String objetivo, String categoria, double valorLimite, LocalDate dataInicio, LocalDate dataFim) {
-        this.objetivo.set(objetivo);
-        this.categoria.set(categoria);
-        this.valorLimite.set(valorLimite);
-        this.dataInicio.set(dataInicio);
-        this.dataFim.set(dataFim);
-    }
 
     // Getters e Setters
-    public int getId() { return id.get(); }
-    public void setId(int id) { this.id.set(id); }
-    public IntegerProperty idProperty() { return id; }
+    public int getId() { 
+        return id_orcamento; 
+    }
 
-    public String getObjetivo() { return objetivo.get(); }
-    public void setObjetivo(String objetivo) { this.objetivo.set(objetivo); }
-    public StringProperty objetivoProperty() { return objetivo; }
+    public void setId(int id_orcamento) { 
+        this.id_orcamento = id_orcamento;
+    }
+    
 
-    public String getCategoria() { return categoria.get(); }
-    public void setCategoria(String categoria) { this.categoria.set(categoria); }
-    public StringProperty categoriaProperty() { return categoria; }
+    public String getTitulo() { 
+        return titulo;
+    }
 
-    public double getValorLimite() { return valorLimite.get(); }
-    public void setValorLimite(double valorLimite) { this.valorLimite.set(valorLimite); }
-    public DoubleProperty valorLimiteProperty() { return valorLimite; }
+    public void setTitulo(String titulo) { 
+        this.titulo = titulo; 
+    }
 
-    public LocalDate getDataInicio() { return dataInicio.get(); }
-    public void setDataInicio(LocalDate dataInicio) { this.dataInicio.set(dataInicio); }
-    public ObjectProperty<LocalDate> dataInicioProperty() { return dataInicio; }
+    public String getCategoria() { 
+        return categoria; 
+    }
 
-    public LocalDate getDataFim() { return dataFim.get(); }
-    public void setDataFim(LocalDate dataFim) { this.dataFim.set(dataFim); }
-    public ObjectProperty<LocalDate> dataFimProperty() { return dataFim; }
+    public void setCategoria(String categoria) { 
+        this.categoria = categoria; 
+    }
+  
 
-    @Override
-    public String toString() {
-        return "Orcamento{" +
-                "id=" + id.get() +
-                ", objetivo='" + objetivo.get() + '\'' +
-                ", categoria='" + categoria.get() + '\'' +
-                ", valorLimite=" + valorLimite.get() +
-                ", dataInicio=" + dataInicio.get() +
-                ", dataFim=" + dataFim.get() +
-                '}';
+    public double getValorLimite() {
+        return valorLimite;
+    }
+
+
+    public void setValorLimite(double valorLimite) { 
+        this.valorLimite = valorLimite; 
+    }
+   
+
+    public LocalDate getDataInicio() { 
+        return dataInicio; 
+    }
+
+    public void setDataInicio(LocalDate dataInicio) {
+        this.dataInicio = dataInicio; 
+    }
+    
+
+    public LocalDate getDataFim() { 
+        return dataFim; 
+    }
+
+    public void setDataFim(LocalDate dataFim) { 
+        this.dataFim = dataFim; 
     }
 }

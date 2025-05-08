@@ -28,7 +28,6 @@ public class Categoria implements Serializable {
         this.recorrente = recorrente;
     }
 
-
     // Getters e Setters
     public int getIdCategoria() {
          return id_categoria; 

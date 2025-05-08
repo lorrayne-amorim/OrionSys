@@ -1,57 +1,94 @@
 package controller;
 
+import model.dao.CategoriaDAO;
+import model.database.Database;
+import model.database.DatabaseFactory;
+import model.domain.Categoria;
+import model.domain.Orcamento;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.collections.FXCollections;
+import javafx.stage.Stage;
 
+import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.List;
 
-public class MetaFinanceiraController {
+public class CadastroOrcamentoDialogController {
 
-    @FXML private TextField txtObjetivo;
+    @FXML private TextField txtTitulo;
     @FXML private ComboBox<String> comboCategoria;
     @FXML private TextField txtValorLimite;
     @FXML private DatePicker dataInicio;
     @FXML private DatePicker dataFim;
 
+    private Stage dialogStage;
+    private Orcamento orcamento;
+    private boolean confirmado = false;
+
+    private final Database database = DatabaseFactory.getDatabase("postgresql");
+    private final Connection connection = database.conectar();
+    private final CategoriaDAO categoriaDAO = new CategoriaDAO();
+
     @FXML
     public void initialize() {
-        comboCategoria.setItems(FXCollections.observableArrayList("Alimentação", "Transporte", "Lazer", "Moradia", "Educação", "Outros"));
+        categoriaDAO.setConnection(connection);
+        carregarCategorias();
+    }
+
+    private void carregarCategorias() {
+        List<Categoria> categorias = categoriaDAO.listar();
+        ObservableList<String> nomes = FXCollections.observableArrayList();
+        for (Categoria c : categorias) {
+            nomes.add(c.getNome());
+        }
+        comboCategoria.setItems(nomes);
+    }
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
+    public void setOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
+
+        txtTitulo.setText(orcamento.getTitulo());
+        comboCategoria.setValue(orcamento.getCategoria());
+        txtValorLimite.setText(String.valueOf(orcamento.getValorLimite()));
+        dataInicio.setValue(orcamento.getDataInicio());
+        dataFim.setValue(orcamento.getDataFim());
+    }
+
+    public boolean isConfirmado() {
+        return confirmado;
     }
 
     @FXML
-    void salvarMeta() {
+    private void handleConfirmar() {
         if (validarCampos()) {
-            String objetivo = txtObjetivo.getText();
-            String categoria = comboCategoria.getValue();
-            double valorLimite = Double.parseDouble(txtValorLimite.getText());
-            LocalDate inicio = dataInicio.getValue();
-            LocalDate fim = dataFim.getValue();
+            orcamento.setTitulo(txtTitulo.getText());
+            orcamento.setCategoria(comboCategoria.getValue());
+            orcamento.setValorLimite(Double.parseDouble(txtValorLimite.getText()));
+            orcamento.setDataInicio(dataInicio.getValue());
+            orcamento.setDataFim(dataFim.getValue());
 
-            // Aqui você salva a meta no banco
-            exibirAlerta("Meta financeira salva com sucesso!", Alert.AlertType.INFORMATION);
+            confirmado = true;
+            dialogStage.close();
         }
     }
 
     @FXML
-    void editarMeta() {
-        if (validarCampos()) {
-            // Implemente a edição no banco
-            exibirAlerta("Meta financeira editada com sucesso!", Alert.AlertType.INFORMATION);
-        }
-    }
-
-    @FXML
-    void excluirMeta() {
-        // Implemente a exclusão no banco
-        exibirAlerta("Meta financeira excluída com sucesso!", Alert.AlertType.INFORMATION);
+    private void handleCancelar() {
+        dialogStage.close();
     }
 
     private boolean validarCampos() {
         String erro = "";
 
-        if (txtObjetivo.getText().isEmpty())
-            erro += "Informe o objetivo da meta.\n";
+        if (txtTitulo.getText().isEmpty())
+            erro += "Informe o título do Orçamento.\n";
 
         if (comboCategoria.getValue() == null)
             erro += "Selecione uma categoria.\n";

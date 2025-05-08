@@ -47,7 +47,7 @@ public class VBoxMainController implements Initializable {
     
     @FXML
     public void handleMenuItemCadastroOrcamento() throws IOException {
-        AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/OrcamentoView.fxml"));
+        AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/CadastroOrcamentoView.fxml"));
         anchorPane.getChildren().setAll(b);
     }
     
