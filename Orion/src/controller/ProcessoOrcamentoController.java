@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 import java.net.URL;
 import java.util.logging.Logger;
 
-public class CadastroOrcamentoController implements Initializable {
+public class ProcessoOrcamentoController implements Initializable {
 
     @FXML private TableView<Orcamento> tableViewOrcamentos;
     @FXML private TableColumn<Orcamento, String> colTitulo;
@@ -63,7 +63,7 @@ public class CadastroOrcamentoController implements Initializable {
             listaOrcamentos = FXCollections.observableArrayList(orcamentos);
             tableViewOrcamentos.setItems(listaOrcamentos);
         } catch (Exception e) {
-            Logger.getLogger(CadastroOrcamentoController.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ProcessoOrcamentoController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -125,7 +125,7 @@ public class CadastroOrcamentoController implements Initializable {
 
     private boolean abrirDialogOrcamento(Orcamento orcamento) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CadastroOrcamentoDialogView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProcessoOrcamentoDialogView.fxml"));
             AnchorPane page = loader.load();
 
             Stage dialogStage = new Stage();
@@ -134,7 +134,7 @@ public class CadastroOrcamentoController implements Initializable {
             dialogStage.initOwner(tableViewOrcamentos.getScene().getWindow());
             dialogStage.setScene(new Scene(page));
 
-            CadastroOrcamentoDialogController controller = loader.getController();
+            ProcessoOrcamentoDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setOrcamento(orcamento); 
 

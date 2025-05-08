@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class InserirTransacaoController {
+public class InserirProcessoTransacaoController {
 
     @FXML private ComboBox<Categoria> comboCategoria;
     @FXML private ComboBox<String> comboLocal;

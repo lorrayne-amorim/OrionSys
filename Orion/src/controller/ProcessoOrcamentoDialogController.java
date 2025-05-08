@@ -16,7 +16,7 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
 
-public class CadastroOrcamentoDialogController {
+public class ProcessoOrcamentoDialogController {
 
     @FXML private TextField txtTitulo;
     @FXML private ComboBox<String> comboCategoria;

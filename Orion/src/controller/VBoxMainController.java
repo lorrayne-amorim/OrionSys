@@ -16,12 +16,14 @@ public class VBoxMainController implements Initializable {
     @FXML
     private MenuItem menuItemCadastroCategoria;
     
-    @FXML
-    private MenuItem menuItemCadastroOrcamento;
+   
     
     //ESSES MENUS AINDA IREMOS MUDAR EM 
     @FXML
     private MenuItem menuItemTransacao;
+    
+    @FXML
+    private MenuItem menuItemOrcamento;
     
     @FXML
     private MenuItem menuItemGraficosVendasPorMes;
@@ -46,14 +48,14 @@ public class VBoxMainController implements Initializable {
     }
     
     @FXML
-    public void handleMenuItemCadastroOrcamento() throws IOException {
-        AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/CadastroOrcamentoView.fxml"));
+    public void handleMenuItemProcessoOrcamento() throws IOException {
+        AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/ProcessoOrcamentoView.fxml"));
         anchorPane.getChildren().setAll(b);
     }
     
     @FXML
-    public void handleMenuItemTransacao() throws IOException {
-        AnchorPane c = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/TransacaoView.fxml"));
+    public void handleMenuItemProcessoTransacao() throws IOException {
+        AnchorPane c = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/ProcessoTransacaoView.fxml"));
         anchorPane.getChildren().setAll(c);
 
     }

@@ -16,7 +16,7 @@ import model.domain.Transacao;
 import java.io.IOException;
 import java.util.List;
 
-public class TransacaoController {
+public class ProcessoTransacaoController {
 
     @FXML private TableView<Transacao> tabelaTransacoes;
     @FXML private TableColumn<Transacao, String> colData;
@@ -87,14 +87,14 @@ public class TransacaoController {
 
     private void abrirFormularioTransacao(Transacao transacao) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/InserirTransacaoView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/InserirProcessoTransacaoView.fxml"));
             AnchorPane page = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.setTitle(transacao == null ? "Inserir Transação" : "Editar Transação");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.setScene(new Scene(page));
 
-            InserirTransacaoController controller = loader.getController();
+            InserirProcessoTransacaoController controller = loader.getController();
             if (transacao != null) {
                 controller.preencherFormulario(transacao);
             }
