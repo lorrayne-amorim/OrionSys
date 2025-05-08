@@ -3,7 +3,7 @@ package model;
 import javafx.beans.property.*;
 import java.time.LocalDate;
 
-public class MetaFinanceira {
+public class Orcamento {
 
     private final IntegerProperty id = new SimpleIntegerProperty();
     private final StringProperty objetivo = new SimpleStringProperty();
@@ -13,9 +13,9 @@ public class MetaFinanceira {
     private final ObjectProperty<LocalDate> dataFim = new SimpleObjectProperty<>();
 
     // Construtores
-    public MetaFinanceira() {}
+    public Orcamento() {}
 
-    public MetaFinanceira(int id, String objetivo, String categoria, double valorLimite, LocalDate dataInicio, LocalDate dataFim) {
+    public Orcamento(int id, String objetivo, String categoria, double valorLimite, LocalDate dataInicio, LocalDate dataFim) {
         this.id.set(id);
         this.objetivo.set(objetivo);
         this.categoria.set(categoria);
@@ -24,7 +24,7 @@ public class MetaFinanceira {
         this.dataFim.set(dataFim);
     }
 
-    public MetaFinanceira(String objetivo, String categoria, double valorLimite, LocalDate dataInicio, LocalDate dataFim) {
+    public Orcamento(String objetivo, String categoria, double valorLimite, LocalDate dataInicio, LocalDate dataFim) {
         this.objetivo.set(objetivo);
         this.categoria.set(categoria);
         this.valorLimite.set(valorLimite);
@@ -59,7 +59,7 @@ public class MetaFinanceira {
 
     @Override
     public String toString() {
-        return "MetaFinanceira{" +
+        return "Orcamento{" +
                 "id=" + id.get() +
                 ", objetivo='" + objetivo.get() + '\'' +
                 ", categoria='" + categoria.get() + '\'' +

@@ -16,7 +16,7 @@
    <children>
       <SplitPane dividerPositions="0.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          
+
           <AnchorPane prefHeight="398.0" prefWidth="297.0">
             <children>
               <TableView fx:id="tableViewCategorias" prefHeight="398.0" prefWidth="254.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -33,7 +33,7 @@
               <Label layoutX="233.0" layoutY="42.0" text="Detalhes da Categoria">
                 <font><Font name="System Bold" size="14.0" /></font>
               </Label>
-              <GridPane layoutX="55.0" layoutY="116.0" prefHeight="180.0" prefWidth="516.0">
+              <GridPane layoutX="55.0" layoutY="116.0" prefHeight="210.0" prefWidth="516.0">
                 <columnConstraints>
                   <ColumnConstraints prefWidth="130.0" />
                   <ColumnConstraints prefWidth="250.0" />
@@ -42,25 +42,28 @@
                   <RowConstraints prefHeight="30.0" />
                   <RowConstraints prefHeight="30.0" />
                   <RowConstraints prefHeight="30.0" />
-                        <RowConstraints prefHeight="30.0" />
+                  <RowConstraints prefHeight="30.0" />
+                  <RowConstraints prefHeight="30.0" />
                 </rowConstraints>
-                 <children>
+                <children>
                     <Label text="Nome:" />
                     <Label fx:id="labelNome" GridPane.columnIndex="1" />
                     <Label text="Tipo:" GridPane.rowIndex="1" />
                     <Label fx:id="labelTipo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Label text="Descrição:" GridPane.rowIndex="2" />
                     <Label fx:id="labelDescricao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <Label text="Ativo:" GridPane.rowIndex="3" />
-                    <Label fx:id="labelAtivo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label text="Prioridade:" GridPane.rowIndex="3" />
+                    <Label fx:id="labelPrioridade" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label text="Recorrente:" GridPane.rowIndex="4" />
+                    <Label fx:id="labelRecorrente" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 </children>
               </GridPane>
 
               <Group layoutX="182.0" layoutY="327.0">
                 <children>
-                        <Button fx:id="buttonRemover2" layoutX="12.0" onAction="#handleInserir" text="Inserir" />
-                        <Button fx:id="buttonRemover1" layoutX="135.0" onAction="#handleRemover" text="Remover" />
-                   <Button fx:id="buttonAlterar" layoutX="73.0" onAction="#handleAlterar" text="Alterar" />
+                    <Button fx:id="buttonRemover2" layoutX="12.0" onAction="#handleInserir" text="Inserir" />
+                    <Button fx:id="buttonRemover1" layoutX="135.0" onAction="#handleRemover" text="Remover" />
+                    <Button fx:id="buttonAlterar" layoutX="73.0" onAction="#handleAlterar" text="Alterar" />
                 </children>
               </Group>
             </children>

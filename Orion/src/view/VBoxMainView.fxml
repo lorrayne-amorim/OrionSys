@@ -13,7 +13,7 @@
           <Menu mnemonicParsing="false" text="Cadastros">
             <items>
               <MenuItem fx:id="menuItemCadastroCategoria" mnemonicParsing="false" onAction="#handleMenuItemCadastroCategoria" text="Categorias" />
-              <MenuItem fx:id="menuItemCadastrosFotografos" mnemonicParsing="false" onAction="#handleMenuItemCadastroMetaFinanceira" text="Metas Financeiras" /> 
+              <MenuItem fx:id="menuItemCadastroOrcamento" mnemonicParsing="false" onAction="#handleMenuItemCadastroOrcamento" text="Orçamentos" /> 
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Processos">

@@ -24,9 +24,12 @@
         <Label layoutX="80.0" layoutY="202.0" text="Descrição:" />
         <TextField fx:id="txtDescricao" layoutX="151.0" layoutY="198.0" prefHeight="25.0" prefWidth="422.0" />
 
-        <CheckBox fx:id="checkAtivo" layoutX="151.0" layoutY="232.0" text="Ativo" />
+        <Label layoutX="80.0" layoutY="242.0" text="Prioridade:" />
+        <ComboBox fx:id="comboPrioridade" layoutX="151.0" layoutY="238.0" prefHeight="25.0" prefWidth="422.0" />
 
-        <Button layoutX="429.0" layoutY="260.0" onAction="#handleConfirmar" text="Confirmar" />
-        <Button layoutX="511.0" layoutY="260.0" onAction="#handleCancelar" text="Cancelar" />
+        <CheckBox fx:id="checkRecorrente" layoutX="151.0" layoutY="274.0" text="Recorrente" />
+
+        <Button layoutX="429.0" layoutY="310.0" onAction="#handleConfirmar" text="Confirmar" />
+        <Button layoutX="511.0" layoutY="310.0" onAction="#handleCancelar" text="Cancelar" />
     </children>
 </AnchorPane>

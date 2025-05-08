@@ -1,6 +1,6 @@
 package controller;
 
-import dao.CategoriaDAO;
+import model.dao.CategoriaDAO;
 import dao.TransacaoDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Categoria;
+import model.domain.Categoria;
 import model.Transacao;
 
 import java.math.BigDecimal;
@@ -35,12 +35,8 @@ public class InserirTransacaoController {
     }
 
     private void carregarCategorias() {
-        try {
-            List<Categoria> categorias = categoriaDAO.listarTodos();
-            comboCategoria.setItems(FXCollections.observableArrayList(categorias));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        List<Categoria> categorias = categoriaDAO.listar();
+        comboCategoria.setItems(FXCollections.observableArrayList(categorias));
     }
 
     private void carregarLocais() {
@@ -71,7 +67,7 @@ public class InserirTransacaoController {
                 return;
             }
 
-            Transacao transacao = new Transacao(categoria.getId(), idLocal, valor, data);
+            Transacao transacao = new Transacao(categoria.getIdCategoria(), idLocal, valor, data);
             boolean sucesso = transacaoDAO.registrarTransacao(transacao);
 
             if (sucesso) {
