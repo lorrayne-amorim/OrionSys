@@ -112,5 +112,4 @@ public class OrcamentoDAO {
         return retorno;
     }
 
-    //Talvez colocar as regras de negócio aqui...
 }
