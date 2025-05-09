@@ -20,11 +20,11 @@ public class OrcamentoDAO {
     }
 
     public boolean inserir(Orcamento orcamento) {
-        String sql = "INSERT INTO orcamento (titulo, categoria, valor_limite, data_inicio, data_fim) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO orcamento (titulo, id_categoria, valor_limite, data_inicio, data_fim) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, orcamento.getTitulo());
-            stmt.setString(2, orcamento.getCategoria());
+            stmt.setInt(2, orcamento.getIdCategoria()); // CORRIGIDO
             stmt.setDouble(3, orcamento.getValorLimite());
             stmt.setDate(4, Date.valueOf(orcamento.getDataInicio()));
             stmt.setDate(5, Date.valueOf(orcamento.getDataFim()));
@@ -37,11 +37,11 @@ public class OrcamentoDAO {
     }
 
     public boolean alterar(Orcamento orcamento) {
-        String sql = "UPDATE orcamento SET titulo=?, categoria=?, valor_limite=?, data_inicio=?, data_fim=? WHERE id_orcamento=?";
+        String sql = "UPDATE orcamento SET titulo=?, id_categoria=?, valor_limite=?, data_inicio=?, data_fim=? WHERE id_orcamento=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, orcamento.getTitulo());
-            stmt.setString(2, orcamento.getCategoria());
+            stmt.setInt(2, orcamento.getIdCategoria()); // CORRIGIDO
             stmt.setDouble(3, orcamento.getValorLimite());
             stmt.setDate(4, Date.valueOf(orcamento.getDataInicio()));
             stmt.setDate(5, Date.valueOf(orcamento.getDataFim()));
@@ -70,7 +70,6 @@ public class OrcamentoDAO {
     public List<Orcamento> listar() {
         List<Orcamento> orcamentos = new ArrayList<>();
         String sql = "SELECT * FROM orcamento ORDER BY titulo";
-
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet resultado = stmt.executeQuery();
@@ -78,7 +77,7 @@ public class OrcamentoDAO {
                 Orcamento orcamento = new Orcamento();
                 orcamento.setId(resultado.getInt("id_orcamento"));
                 orcamento.setTitulo(resultado.getString("titulo"));
-                orcamento.setCategoria(resultado.getString("categoria"));
+                orcamento.setIdCategoria(resultado.getInt("id_categoria")); // CORRIGIDO
                 orcamento.setValorLimite(resultado.getDouble("valor_limite"));
                 orcamento.setDataInicio(resultado.getDate("data_inicio").toLocalDate());
                 orcamento.setDataFim(resultado.getDate("data_fim").toLocalDate());
@@ -101,7 +100,7 @@ public class OrcamentoDAO {
                 retorno = new Orcamento();
                 retorno.setId(resultado.getInt("id_orcamento"));
                 retorno.setTitulo(resultado.getString("titulo"));
-                retorno.setCategoria(resultado.getString("categoria"));
+                retorno.setIdCategoria(resultado.getInt("id_categoria")); // CORRIGIDO
                 retorno.setValorLimite(resultado.getDouble("valor_limite"));
                 retorno.setDataInicio(resultado.getDate("data_inicio").toLocalDate());
                 retorno.setDataFim(resultado.getDate("data_fim").toLocalDate());
@@ -111,5 +110,4 @@ public class OrcamentoDAO {
         }
         return retorno;
     }
-
 }

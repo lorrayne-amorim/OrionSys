@@ -14,7 +14,9 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProcessoOrcamentoDialogController {
 
@@ -32,6 +34,8 @@ public class ProcessoOrcamentoDialogController {
     private final Connection connection = database.conectar();
     private final CategoriaDAO categoriaDAO = new CategoriaDAO();
 
+    private final Map<String, Integer> categoriaNomeToId = new HashMap<>();
+
     @FXML
     public void initialize() {
         categoriaDAO.setConnection(connection);
@@ -43,6 +47,7 @@ public class ProcessoOrcamentoDialogController {
         ObservableList<String> nomes = FXCollections.observableArrayList();
         for (Categoria c : categorias) {
             nomes.add(c.getNome());
+            categoriaNomeToId.put(c.getNome(), c.getIdCategoria());
         }
         comboCategoria.setItems(nomes);
     }
@@ -55,7 +60,15 @@ public class ProcessoOrcamentoDialogController {
         this.orcamento = orcamento;
 
         txtTitulo.setText(orcamento.getTitulo());
-        comboCategoria.setValue(orcamento.getCategoria());
+
+        // Seleciona a categoria atual se estiver carregada
+        for (Map.Entry<String, Integer> entry : categoriaNomeToId.entrySet()) {
+            if (entry.getValue() == orcamento.getIdCategoria()) {
+                comboCategoria.setValue(entry.getKey());
+                break;
+            }
+        }
+
         txtValorLimite.setText(String.valueOf(orcamento.getValorLimite()));
         dataInicio.setValue(orcamento.getDataInicio());
         dataFim.setValue(orcamento.getDataFim());
@@ -69,7 +82,11 @@ public class ProcessoOrcamentoDialogController {
     private void handleConfirmar() {
         if (validarCampos()) {
             orcamento.setTitulo(txtTitulo.getText());
-            orcamento.setCategoria(comboCategoria.getValue());
+
+            String nomeCategoria = comboCategoria.getValue();
+            Integer idCategoria = categoriaNomeToId.get(nomeCategoria);
+            orcamento.setIdCategoria(idCategoria); // SALVA O ID da categoria, não o nome
+
             orcamento.setValorLimite(Double.parseDouble(txtValorLimite.getText()));
             orcamento.setDataInicio(dataInicio.getValue());
             orcamento.setDataFim(dataFim.getValue());

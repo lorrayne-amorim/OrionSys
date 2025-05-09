@@ -184,21 +184,28 @@ public class TransacaoDAO {
     }
 
     public boolean ultrapassaOrcamento(Transacao transacao) {
-        String sql = "SELECT valor_limite, (SELECT COALESCE(SUM(valor), 0) FROM transacao WHERE id_categoria = o.id_categoria AND data BETWEEN o.data_inicio AND o.data_fim) AS total_utilizado FROM orcamento o WHERE id_categoria = ? AND ? BETWEEN o.data_inicio AND o.data_fim";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, transacao.getIdCategoria());
-            stmt.setTimestamp(2, Timestamp.valueOf(transacao.getData()));
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                BigDecimal limite = rs.getBigDecimal("valor_limite");
-                BigDecimal utilizado = rs.getBigDecimal("total_utilizado");
-                return utilizado.add(transacao.getValor()).compareTo(limite) > 0;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+     String sql = "SELECT valor_limite, " +
+                  "(SELECT COALESCE(SUM(valor), 0) " +
+                  " FROM transacao " +
+                  " WHERE id_categoria = o.categoria " +
+                  " AND data BETWEEN o.data_inicio AND o.data_fim) AS total_utilizado " +
+                  "FROM orcamento o " +
+                  "WHERE categoria = ? AND ? BETWEEN o.data_inicio AND o.data_fim";
+     try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+         stmt.setInt(1, transacao.getIdCategoria());
+         stmt.setTimestamp(2, Timestamp.valueOf(transacao.getData()));
+         ResultSet rs = stmt.executeQuery();
+         if (rs.next()) {
+             BigDecimal limite = rs.getBigDecimal("valor_limite");
+             BigDecimal utilizado = rs.getBigDecimal("total_utilizado");
+             return utilizado.add(transacao.getValor()).compareTo(limite) > 0;
+         }
+     } catch (SQLException e) {
+         e.printStackTrace();
+     }
+     return false;
+ }
+
 
     public BigDecimal calcularSaldoAvista(int idUsuario) {
         try {

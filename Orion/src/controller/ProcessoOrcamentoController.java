@@ -3,8 +3,10 @@ package controller;
 // @author lorrayne
 
 import model.dao.OrcamentoDAO;
+import model.dao.CategoriaDAO;
 import model.database.Database;
 import model.database.DatabaseFactory;
+import model.domain.Categoria;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
@@ -39,6 +41,7 @@ public class ProcessoOrcamentoController implements Initializable {
     @FXML private Label labelDataFim;
 
     private OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+    private CategoriaDAO categoriaDAO = new CategoriaDAO();
     private ObservableList<Orcamento> listaOrcamentos;
 
     private final Database database = DatabaseFactory.getDatabase("postgresql");
@@ -47,10 +50,14 @@ public class ProcessoOrcamentoController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         orcamentoDAO.setConnection(connection);
+        categoriaDAO.setConnection(connection);
         carregarTabela();
 
         colTitulo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTitulo()));
-        colCategoria.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getCategoria()));
+        colCategoria.setCellValueFactory(cellData -> {
+            Categoria categoria = categoriaDAO.buscar(cellData.getValue().getIdCategoria());
+            return new javafx.beans.property.SimpleStringProperty(categoria != null ? categoria.getNome() : "Desconhecida");
+        });
 
         tableViewOrcamentos.getSelectionModel().selectedItemProperty().addListener(
             (obs, oldSelection, newSelection) -> mostrarDetalhesOrcamento(newSelection)
@@ -69,8 +76,9 @@ public class ProcessoOrcamentoController implements Initializable {
 
     private void mostrarDetalhesOrcamento(Orcamento orcamento) {
         if (orcamento != null) {
+            Categoria categoria = categoriaDAO.buscar(orcamento.getIdCategoria());
             labelTitulo.setText(orcamento.getTitulo());
-            labelCategoria.setText(orcamento.getCategoria());
+            labelCategoria.setText(categoria != null ? categoria.getNome() : "Desconhecida");
             labelValorLimite.setText(String.format("R$ %.2f", orcamento.getValorLimite()));
             labelDataInicio.setText(orcamento.getDataInicio().toString());
             labelDataFim.setText(orcamento.getDataFim().toString());
@@ -140,7 +148,7 @@ public class ProcessoOrcamentoController implements Initializable {
 
             dialogStage.showAndWait();
             return controller.isConfirmado();
-           
+
         } catch (IOException e) {
             e.printStackTrace();
             return false;

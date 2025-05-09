@@ -59,22 +59,24 @@ public class CategoriaDAO {
     }
 
     public boolean remover(Categoria categoria) {
-        // Primeiro verifica se a categoria está sendo usada em transações
-        String sqlVerificaTransacoes = "SELECT COUNT(*) FROM transacao WHERE id_categoria=?";
         try {
+            // Verifica se a categoria está sendo usada em transações
+            String sqlVerificaTransacoes = "SELECT COUNT(*) FROM transacao WHERE id_categoria=?";
             PreparedStatement stmtVerificaTransacoes = connection.prepareStatement(sqlVerificaTransacoes);
             stmtVerificaTransacoes.setInt(1, categoria.getIdCategoria());
             ResultSet rs = stmtVerificaTransacoes.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("Categoria associada a transações.");
                 return false;
             }
 
-            // Verifica se a categoria está sendo usada em orçamentos
+            // Verifica se está sendo usada em orçamentos (coluna correta: categoria)
             String sqlVerificaOrcamentos = "SELECT COUNT(*) FROM orcamento WHERE id_categoria=?";
             PreparedStatement stmtVerificaOrcamentos = connection.prepareStatement(sqlVerificaOrcamentos);
             stmtVerificaOrcamentos.setInt(1, categoria.getIdCategoria());
             rs = stmtVerificaOrcamentos.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("Categoria associada a orçamentos.");
                 return false;
             }
 
@@ -84,6 +86,7 @@ public class CategoriaDAO {
             stmt.setInt(1, categoria.getIdCategoria());
             stmt.execute();
             return true;
+
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
