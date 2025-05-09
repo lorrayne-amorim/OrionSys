@@ -118,8 +118,15 @@ public class CadastroCategoriaController implements Initializable {
             confirm.setHeaderText("Tem certeza que deseja excluir?");
             Optional<ButtonType> result = confirm.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                categoriaDAO.remover(selecionada);
-                carregarTabela();
+                boolean removido = categoriaDAO.remover(selecionada);
+                if (!removido) {
+                    // Avisa que não foi possível remover por causa de registros dependentes
+                    mostrarAlerta("Não é possível remover", 
+                        "Esta categoria está sendo usada em transações ou orçamentos. " +
+                        "Remova essas referências antes de excluir a categoria.");
+                } else {
+                    carregarTabela();
+                }
             }
         } else {
             mostrarAlerta("Seleção necessária", "Por favor, selecione uma categoria para remover.");

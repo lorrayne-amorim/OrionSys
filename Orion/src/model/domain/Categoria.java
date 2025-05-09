@@ -77,4 +77,9 @@ public class Categoria implements Serializable {
         this.recorrente = recorrente;
     }
    
+    @Override
+    public String toString() {
+        return nome;
+}
+
 }

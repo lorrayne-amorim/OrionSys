@@ -25,12 +25,14 @@
              <TableColumn fx:id="colValor" minWidth="0.0" prefWidth="175.0" text="Valor (R$)" />
          </columns>
      </TableView>
-      <Button layoutX="734.0" layoutY="537.0" onAction="#handleCancelar" text="Cancelar Transação" />
-      <Button layoutX="618.0" layoutY="537.0" onAction="#handleInserir" text="Inserir Transação" />
+      <Button layoutX="688.0" layoutY="537.0" onAction="#handleCancelar" text="Cancelar Transação" />
+      <Button layoutX="521.0" layoutY="537.0" onAction="#handleInserir" text="Inserir Transação" />
 
      <Label layoutX="385.0" layoutY="42.0" text="Minhas Transações">
       <font>
          <Font name="System Bold" size="18.0" />
       </font>
    </Label>
+   <Button layoutX="822.0" layoutY="537.0" onAction="#handleVoltar" text="Voltar" />
+   <Button layoutX="635.0" layoutY="537.0" onAction="#handleEditar" text="Editar" />
 </AnchorPane>

@@ -5,7 +5,8 @@ import java.time.LocalDateTime;
 
 public class Transacao {
 
-    private int id;
+    private int idTransacao;
+    private int idUsuario;
     private int idCategoria;
     private String nomeCategoria;
     private int idLocal;
@@ -16,35 +17,38 @@ public class Transacao {
 
     public Transacao() {}
 
-    public Transacao(int id, int idCategoria, int idLocal, BigDecimal valor, LocalDateTime data) {
-        this.id = id;
+    public Transacao(int idTransacao, int idUsuario, int idCategoria, String nomeCategoria, int idLocal, String nomeLocal, BigDecimal valor,  String formaPagamento, LocalDateTime data) {
+        this.idTransacao = idTransacao;
+        this.idUsuario = idUsuario;
         this.idCategoria = idCategoria;
+        this.nomeCategoria = nomeCategoria;
         this.idLocal = idLocal;
+        this.nomeLocal = nomeLocal;
         this.valor = valor;
+        this.formaPagamento = formaPagamento;
         this.data = data;
     }
 
-    public Transacao(int idCategoria, int idLocal, BigDecimal valor, LocalDateTime data) {
-        this.idCategoria = idCategoria;
-        this.idLocal = idLocal;
-        this.valor = valor;
-        this.data = data;
-    }
 
     // Getters e Setters
 
-    public int getId() {
-        return id;
+    public int getIdTransacao() {
+        return idTransacao;
     }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setIdTransacao(int idTransacao) {
+        this.idTransacao = idTransacao;
+    }
+    
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getIdCategoria() {
         return idCategoria;
     }
-
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
@@ -52,7 +56,6 @@ public class Transacao {
     public String getNomeCategoria() {
         return nomeCategoria;
     }
-
     public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
     }
@@ -60,7 +63,6 @@ public class Transacao {
     public int getIdLocal() {
         return idLocal;
     }
-
     public void setIdLocal(int idLocal) {
         this.idLocal = idLocal;
     }
@@ -68,7 +70,6 @@ public class Transacao {
     public String getNomeLocal() {
         return nomeLocal;
     }
-
     public void setNomeLocal(String nomeLocal) {
         this.nomeLocal = nomeLocal;
     }
@@ -76,7 +77,6 @@ public class Transacao {
     public BigDecimal getValor() {
         return valor;
     }
-
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
@@ -84,7 +84,6 @@ public class Transacao {
     public LocalDateTime getData() {
         return data;
     }
-
     public void setData(LocalDateTime data) {
         this.data = data;
     }
@@ -92,7 +91,6 @@ public class Transacao {
     public String getFormaPagamento(){
         return formaPagamento;
     }
-
     public void setFormaPagamento(String formaPagamento){
         this.formaPagamento = formaPagamento;
     }

@@ -1,5 +1,7 @@
 package model.dao;
 
+// @author lorrayne
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +59,28 @@ public class CategoriaDAO {
     }
 
     public boolean remover(Categoria categoria) {
-        String sql = "DELETE FROM categoria WHERE id_categoria=?";
+        // Primeiro verifica se a categoria está sendo usada em transações
+        String sqlVerificaTransacoes = "SELECT COUNT(*) FROM transacao WHERE id_categoria=?";
         try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmtVerificaTransacoes = connection.prepareStatement(sqlVerificaTransacoes);
+            stmtVerificaTransacoes.setInt(1, categoria.getIdCategoria());
+            ResultSet rs = stmtVerificaTransacoes.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                return false;
+            }
+
+            // Verifica se a categoria está sendo usada em orçamentos
+            String sqlVerificaOrcamentos = "SELECT COUNT(*) FROM orcamento WHERE id_categoria=?";
+            PreparedStatement stmtVerificaOrcamentos = connection.prepareStatement(sqlVerificaOrcamentos);
+            stmtVerificaOrcamentos.setInt(1, categoria.getIdCategoria());
+            rs = stmtVerificaOrcamentos.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                return false;
+            }
+
+            // Exclui a categoria
+            String sqlDelete = "DELETE FROM categoria WHERE id_categoria=?";
+            PreparedStatement stmt = connection.prepareStatement(sqlDelete);
             stmt.setInt(1, categoria.getIdCategoria());
             stmt.execute();
             return true;
@@ -67,7 +88,8 @@ public class CategoriaDAO {
             Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-    }
+}
+
 
     public List<Categoria> listar() {
        List<Categoria> categorias = new ArrayList<>();
@@ -83,7 +105,6 @@ public class CategoriaDAO {
                categoria.setTipo(resultado.getString("tipo"));
                categoria.setDescricao(resultado.getString("descricao"));
 
-               // Trata nulos
                String prioridade = resultado.getString("prioridade");
                categoria.setPrioridade(prioridade != null ? prioridade : "Média");
 
@@ -121,9 +142,4 @@ public class CategoriaDAO {
         return categorias;
     }
 
-    //Talvez colocar as regras de negocio aqui...
-
-    public Categoria buscarPorId(int idCategoria) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

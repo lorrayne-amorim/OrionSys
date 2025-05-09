@@ -4,11 +4,21 @@ import model.domain.Usuario;
 import java.sql.*;
 import model.database.Database;
 import model.database.DatabaseFactory;
+import java.math.BigDecimal;
+import java.sql.Connection;
 
 
 public class UsuarioDAO {
-    private final Connection connection;
-
+    private Connection connection;
+    
+    public Connection getConnection() {
+        return connection;
+    }
+    
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+    
     public UsuarioDAO() {
         Database database = DatabaseFactory.getDatabase("postgresql");
         this.connection = database.conectar();
@@ -50,4 +60,22 @@ public class UsuarioDAO {
         }
         return null; // se não encontrar
     }
+     
+     public BigDecimal buscarSaldoPorId(int idUsuario) {
+        String sql = "SELECT saldo FROM usuario WHERE id_usuario = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getBigDecimal("saldo");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return BigDecimal.ZERO;
+    }
+
+    
+
+
 }

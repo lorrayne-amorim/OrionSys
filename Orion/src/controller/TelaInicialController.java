@@ -49,11 +49,16 @@ public class TelaInicialController {
 
         if (usuario != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/VBoxMainView.fxml")); // ou o FXML final
-                Parent root = loader.load(); // pode ser VBox, BorderPane, etc.
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/VBoxMainView.fxml"));
+                Parent root = loader.load();
+
+                VBoxMainController controller = loader.getController();
+                controller.setIdUsuarioLogado(usuario.getIdUsuario()); // 👈 ESSENCIAL
 
                 Stage stage = (Stage) btnEntrar.getScene().getWindow();
                 stage.setScene(new Scene(root));
+                stage.show();
+
             } catch (Exception e) {
                 e.printStackTrace();
                 mostrarAlerta("Erro ao carregar sistema.");

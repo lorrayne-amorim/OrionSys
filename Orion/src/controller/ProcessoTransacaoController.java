@@ -15,6 +15,7 @@ import model.domain.Transacao;
 
 import java.io.IOException;
 import java.util.List;
+import javafx.scene.Parent;
 
 public class ProcessoTransacaoController {
 
@@ -26,6 +27,19 @@ public class ProcessoTransacaoController {
 
     private final TransacaoDAO transacaoDAO = new TransacaoDAO();
     private ObservableList<Transacao> listaTransacoes;
+
+    private int idUsuarioLogado;
+    
+    private VBoxMainController mainController;
+
+    public void setMainController(VBoxMainController controller) {
+        this.mainController = controller;
+    }
+
+
+    public void setIdUsuarioLogado(int idUsuario) {
+        this.idUsuarioLogado = idUsuario;
+    }
 
     @FXML
     public void initialize() {
@@ -62,6 +76,24 @@ public class ProcessoTransacaoController {
             mostrarAlerta("Selecione uma transação para editar.");
         }
     }
+    
+    @FXML
+    public void handleVoltar() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/VBoxMainView.fxml"));
+            Parent mainView = loader.load();
+
+            VBoxMainController controller = loader.getController();
+            controller.setIdUsuarioLogado(idUsuarioLogado); // Mantém o usuário logado
+
+            Stage stage = (Stage) tabelaTransacoes.getScene().getWindow();
+            stage.setScene(new Scene(mainView));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void handleCancelar() {
@@ -72,7 +104,7 @@ public class ProcessoTransacaoController {
             alerta.setHeaderText(null);
             alerta.setContentText("Tem certeza que deseja cancelar esta transação?");
             if (alerta.showAndWait().get() == ButtonType.OK) {
-                boolean sucesso = transacaoDAO.cancelarTransacao(selecionada.getId());
+                boolean sucesso = transacaoDAO.cancelarTransacao(selecionada.getIdTransacao());
                 if (sucesso) {
                     mostrarInfo("Transação cancelada com sucesso.");
                     carregarTransacoes();
@@ -95,15 +127,24 @@ public class ProcessoTransacaoController {
             dialogStage.setScene(new Scene(page));
 
             InserirProcessoTransacaoController controller = loader.getController();
+            controller.setIdUsuarioLogado(idUsuarioLogado);
             if (transacao != null) {
                 controller.preencherFormulario(transacao);
             }
 
             dialogStage.showAndWait();
+
+            // 👇 Atualiza saldo após salvar/editar
+            if (mainController != null) {
+                mainController.atualizarSaldo();
+            }
+
+            carregarTransacoes();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+}
+
 
     private void mostrarAlerta(String msg) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
