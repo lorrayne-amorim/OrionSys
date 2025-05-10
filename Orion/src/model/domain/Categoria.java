@@ -1,51 +1,85 @@
-package model;
+package model.domain;
 
 // @author lorrayne
 
-import javafx.beans.property.*;
+import java.io.Serializable;
 
-public class Categoria {
-    private final IntegerProperty id = new SimpleIntegerProperty();
-    private final StringProperty nome = new SimpleStringProperty();
-    private final StringProperty tipo = new SimpleStringProperty();
-    private final StringProperty descricao = new SimpleStringProperty();
-    private final BooleanProperty ativo = new SimpleBooleanProperty();  
+public class Categoria implements Serializable {
 
-    public Categoria() {}
+    private int id_categoria;
+    private String nome;
+    private String tipo;
+    private String descricao;
+    private String prioridade; // alta, média, baixa
+    private Boolean recorrente; // true ou false
+ 
 
-    public Categoria(int id, String nome, String tipo, String descricao, boolean ativo) {
-        this.id.set(id);
-        this.nome.set(nome);
-        this.tipo.set(tipo);
-        this.descricao.set(descricao);
-        this.ativo.set(ativo);
+    public Categoria() {
+        this.recorrente = false;
+        this.prioridade = "Média";
     }
 
-    public Categoria(String nome, String tipo, String descricao, boolean ativo) {
-        this.nome.set(nome);
-        this.tipo.set(tipo);
-        this.descricao.set(descricao);
-        this.ativo.set(ativo);
+    public Categoria(int id_categoria, String nome, String tipo, String descricao, String prioridade, boolean recorrente) {
+        this.id_categoria = id_categoria;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.descricao = descricao;
+        this.prioridade = prioridade;
+        this.recorrente = recorrente;
     }
 
     // Getters e Setters
-    public int getId() { return id.get(); }
-    public void setId(int id) { this.id.set(id); }
-    public IntegerProperty idProperty() { return id; }
+    public int getIdCategoria() {
+         return id_categoria; 
+    }
 
-    public String getNome() { return nome.get(); }
-    public void setNome(String nome) { this.nome.set(nome); }
-    public StringProperty nomeProperty() { return nome; }
+    public void setIdCategoria(int id_categoria) { 
+        this.id_categoria = id_categoria; 
+    }
 
-    public String getTipo() { return tipo.get(); }
-    public void setTipo(String tipo) { this.tipo.set(tipo); }
-    public StringProperty tipoProperty() { return tipo; }
+    public String getNome() {
+        return nome;
+    }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    public String getDescricao() { return descricao.get(); }
-    public void setDescricao(String descricao) { this.descricao.set(descricao); }
-    public StringProperty descricaoProperty() { return descricao; }
+    public String getTipo() {
+        return tipo;
+    }
+    
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-    public boolean isAtivo() { return ativo.get(); }
-    public void setAtivo(boolean ativo) { this.ativo.set(ativo); }
-    public BooleanProperty ativoProperty() { return ativo; }
+    public String getDescricao() {
+        return descricao;
+    }
+    
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getPrioridade() {
+        return prioridade;
+    }
+    
+    public void setPrioridade(String prioridade) {
+        this.prioridade = prioridade;
+    }
+   
+    public boolean getRecorrente(){
+        return recorrente != null && recorrente;
+    }
+
+    public void setRecorrente(Boolean recorrente){
+        this.recorrente = recorrente;
+    }
+   
+    @Override
+    public String toString() {
+        return nome;
+    }
+
 }

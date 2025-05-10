@@ -10,6 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import java.math.BigDecimal;
+import javafx.scene.control.Label;
+import model.dao.UsuarioDAO;
 
 public class VBoxMainController implements Initializable {
 
@@ -17,19 +20,18 @@ public class VBoxMainController implements Initializable {
     private MenuItem menuItemCadastroCategoria;
     
     @FXML
-    private MenuItem menuItemCadastroMetaFinanceira;
+    private MenuItem menuItemTransacao;
     
-    //ESSES MENUS AINDA IREMOS MUDAR EM 
     @FXML
-    private MenuItem menuItemProcessosVendas;
+    private MenuItem menuItemOrcamento;
     
     @FXML
     private MenuItem menuItemGraficosVendasPorMes;
-    
+    @FXML private Label labelSaldo;
+
     @FXML
     private MenuItem menuItemRelatoriosQuantidadeProdutos;
-
-    // MUDAR OS MENUS DE CIMA
+    private int idUsuarioLogado;
     
     @FXML
     private AnchorPane anchorPane;
@@ -46,17 +48,41 @@ public class VBoxMainController implements Initializable {
     }
     
     @FXML
-    public void handleMenuItemCadastroMetaFinanceira() throws IOException {
-        AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/MetaFinanceiraView.fxml"));
+    public void handleMenuItemProcessoOrcamento() throws IOException {
+        AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/ProcessoOrcamentoView.fxml"));
         anchorPane.getChildren().setAll(b);
     }
     
-    @FXML
-    public void handleMenuItemTransacao() throws IOException {
-        AnchorPane c = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/TransacaoView.fxml"));
-        anchorPane.getChildren().setAll(c);
-
+    public void atualizarSaldo() {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        BigDecimal saldo = usuarioDAO.buscarSaldoPorId(idUsuarioLogado);
+        if (saldo != null) {
+            labelSaldo.setText(String.format("Saldo: R$ %.2f", saldo));
+        } else {
+            labelSaldo.setText("Saldo: erro");
+        }
     }
+
+
+    public void setIdUsuarioLogado(int idUsuario) {
+     this.idUsuarioLogado = idUsuario;
+     atualizarSaldo();
+ }
+
+    
+    @FXML
+    public void handleMenuItemProcessoTransacao() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProcessoTransacaoView.fxml"));
+        AnchorPane c = loader.load();
+
+        ProcessoTransacaoController controller = loader.getController();
+        controller.setIdUsuarioLogado(idUsuarioLogado);
+        controller.setMainController(this); // Aqui é a conexão com VBoxMain
+
+        anchorPane.getChildren().setAll(c);
+    }
+
+    
 
     
 }

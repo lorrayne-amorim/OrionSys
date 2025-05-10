@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Rafael Vargas Mesquita
+ * @author Lorrayne
  */
 public class DatabasePostgreSQL implements Database {
     private Connection connection;
@@ -28,7 +28,9 @@ public class DatabasePostgreSQL implements Database {
     @Override
     public void desconectar(Connection connection) {
         try {
-            connection.close();
+            if(connection != null && !connection.isClosed()){
+                connection.close();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabasePostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
         }

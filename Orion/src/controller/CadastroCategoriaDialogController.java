@@ -5,14 +5,24 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import model.Categoria;
+import model.domain.Categoria;
 
 public class CadastroCategoriaDialogController {
 
-    @FXML private TextField txtNome;
-    @FXML private ComboBox<String> comboTipo;
-    @FXML private TextField txtDescricao;
-    @FXML private CheckBox checkAtivo;
+    @FXML 
+    private TextField txtNome;
+    
+    @FXML 
+    private ComboBox<String> comboTipo;
+    
+    @FXML 
+    private TextField txtDescricao;
+    
+    @FXML 
+    private ComboBox<String> comboPrioridade;
+    
+    @FXML 
+    private CheckBox checkRecorrente;
 
     private Stage dialogStage;
     private Categoria categoria;
@@ -21,6 +31,7 @@ public class CadastroCategoriaDialogController {
     @FXML
     private void initialize() {
         comboTipo.getItems().addAll("receita", "despesa");
+        comboPrioridade.getItems().addAll("Alta", "Média", "Baixa");
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -33,7 +44,8 @@ public class CadastroCategoriaDialogController {
         txtNome.setText(categoria.getNome());
         comboTipo.setValue(categoria.getTipo());
         txtDescricao.setText(categoria.getDescricao());
-        checkAtivo.setSelected(categoria.isAtivo());
+        comboPrioridade.setValue(categoria.getPrioridade());
+        checkRecorrente.setSelected(categoria.getRecorrente());
     }
 
     public boolean isConfirmado() {
@@ -42,10 +54,10 @@ public class CadastroCategoriaDialogController {
 
     @FXML
     private void handleConfirmar() {
-        if (txtNome.getText().isEmpty() || comboTipo.getValue() == null) {
+        if (txtNome.getText().isEmpty() || comboTipo.getValue() == null || comboPrioridade.getValue() == null) {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
             alerta.setTitle("Campos obrigatórios");
-            alerta.setHeaderText("Preencha nome e tipo.");
+            alerta.setHeaderText("Preencha nome, tipo e prioridade.");
             alerta.showAndWait();
             return;
         }
@@ -53,7 +65,8 @@ public class CadastroCategoriaDialogController {
         categoria.setNome(txtNome.getText());
         categoria.setTipo(comboTipo.getValue());
         categoria.setDescricao(txtDescricao.getText());
-        categoria.setAtivo(checkAtivo.isSelected());
+        categoria.setPrioridade(comboPrioridade.getValue());
+        categoria.setRecorrente(checkRecorrente.isSelected());
 
         confirmado = true;
         dialogStage.close();
@@ -63,4 +76,4 @@ public class CadastroCategoriaDialogController {
     private void handleCancelar() {
         dialogStage.close();
     }
-} 
+}
