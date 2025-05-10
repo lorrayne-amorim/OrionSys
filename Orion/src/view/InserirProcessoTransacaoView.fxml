@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="248.0" prefWidth="471.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InserirTransacaoController">
+<AnchorPane prefHeight="309.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InserirProcessoTransacaoController">
      <Label layoutX="139.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Registrar Nova Transação" textAlignment="CENTER" />
    <Group layoutX="59.0" layoutY="154.0">
       <children>
@@ -22,12 +22,7 @@
             <ComboBox fx:id="comboCategoria" layoutX="60.0" prefWidth="250" />
       </children>
    </Group>
-   <Group layoutX="251.0" layoutY="209.0">
-      <children>
-            <Button onAction="#salvarTransacao" text="Salvar" />
-            <Button layoutX="56.0" onAction="#fecharJanela" text="Cancelar" />
-      </children>
-   </Group>
+   <Group layoutX="251.0" layoutY="209.0" />
    <Group layoutX="58.0" layoutY="86.0">
       <children>
             <Label layoutY="4.0" minWidth="100" text="Local:" />
@@ -40,4 +35,13 @@
             <TextField fx:id="txtValor" layoutX="60.0" prefWidth="250" />
       </children>
    </Group>
+   <Group>
+      <children>
+      <Label layoutX="13.0" layoutY="191.0" prefHeight="17.0" prefWidth="139.0" text="Forma de Pagamento:" />
+      <ComboBox fx:id="comboFormaPagamento" layoutX="171.0" layoutY="187.0" prefWidth="200.0" />
+       </children>
+   </Group>
+      <Button layoutX="320.0" layoutY="240.0" onAction="#fecharJanela" text="Cancelar" />
+      <Button layoutX="260.0" layoutY="242.0" onAction="#salvarTransacao" text="Salvar" />
+
 </AnchorPane>

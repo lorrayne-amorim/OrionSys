@@ -1,8 +1,11 @@
 package controller;
 
-// @author lorrayne
+// @author lorrayne 
 
-import dao.CategoriaDAO;
+import model.dao.CategoriaDAO;
+import model.database.Database;
+import model.database.DatabaseFactory;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,43 +15,68 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Categoria;
-
+import model.domain.Categoria;
+import java.sql.Connection;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import javafx.fxml.Initializable;
+import java.util.ResourceBundle;
+import java.net.URL;
+import java.util.Optional;
+import java.util.logging.Logger;
 
-public class CadastroCategoriaController {
+public class CadastroCategoriaController implements Initializable {
 
-    @FXML private TableView<Categoria> tableViewCategorias;
-    @FXML private TableColumn<Categoria, String> colNome;
-    @FXML private TableColumn<Categoria, String> colTipo;
+    @FXML 
+    private TableView<Categoria> tableViewCategorias;
+    
+    @FXML 
+    private TableColumn<Categoria, String> colNome;
+    
+    @FXML 
+    private TableColumn<Categoria, String> colTipo;
 
-    @FXML private Label labelNome;
-    @FXML private Label labelTipo;
-    @FXML private Label labelDescricao;
-    @FXML private Label labelAtivo;
+    @FXML 
+    private Label labelNome;
+    
+    @FXML 
+    private Label labelTipo;
+    
+    @FXML 
+    private Label labelDescricao;
+   
+    @FXML 
+    private Label labelPrioridade;
+    
+    @FXML
+    private Label labelRecorrente;
 
     private CategoriaDAO categoriaDAO = new CategoriaDAO();
     private ObservableList<Categoria> listaCategorias;
+    private Database database = DatabaseFactory.getDatabase("postgresql");
+    private Connection connection = database.conectar();
 
-    @FXML
-    public void initialize() {
-        colNome.setCellValueFactory(cellData -> cellData.getValue().nomeProperty());
-        colTipo.setCellValueFactory(cellData -> cellData.getValue().tipoProperty());
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        categoriaDAO.setConnection(connection);
+        carregarTabela();
+
+        colNome.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getNome()));
+        colTipo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTipo()));
 
         tableViewCategorias.getSelectionModel().selectedItemProperty().addListener(
             (obs, oldSelection, newSelection) -> mostrarDetalhesCategoria(newSelection)
         );
-
-        carregarTabela();
     }
 
     private void carregarTabela() {
         try {
-            listaCategorias = FXCollections.observableArrayList(categoriaDAO.listarTodos());
+            List<Categoria> categorias = categoriaDAO.listar();
+            listaCategorias = FXCollections.observableArrayList(categorias);
             tableViewCategorias.setItems(listaCategorias);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Logger.getLogger(CadastroCategoriaController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -57,12 +85,14 @@ public class CadastroCategoriaController {
             labelNome.setText(categoria.getNome());
             labelTipo.setText(categoria.getTipo());
             labelDescricao.setText(categoria.getDescricao());
-            labelAtivo.setText(categoria.isAtivo() ? "Sim" : "Não");
+            labelPrioridade.setText(categoria.getPrioridade());
+            labelRecorrente.setText(categoria.getRecorrente() ? "Sim" : "Não");
         } else {
             labelNome.setText("");
             labelTipo.setText("");
             labelDescricao.setText("");
-            labelAtivo.setText("");
+            labelPrioridade.setText("");
+            labelRecorrente.setText("");
         }
     }
 
@@ -71,11 +101,8 @@ public class CadastroCategoriaController {
         Categoria nova = new Categoria();
         boolean confirmado = abrirDialogCategoria(nova);
         if (confirmado) {
-            try {
-                categoriaDAO.inserir(nova);
+            if (categoriaDAO.inserir(nova)) {
                 carregarTabela();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -86,12 +113,8 @@ public class CadastroCategoriaController {
         if (selecionada != null) {
             boolean confirmado = abrirDialogCategoria(selecionada);
             if (confirmado) {
-                try {
-                    categoriaDAO.atualizar(selecionada);
-                    carregarTabela();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                categoriaDAO.alterar(selecionada);
+                carregarTabela();
             }
         } else {
             mostrarAlerta("Seleção necessária", "Por favor, selecione uma categoria para editar.");
@@ -102,11 +125,20 @@ public class CadastroCategoriaController {
     public void handleRemover() {
         Categoria selecionada = tableViewCategorias.getSelectionModel().getSelectedItem();
         if (selecionada != null) {
-            try {
-                categoriaDAO.excluir(selecionada.getId());
-                carregarTabela();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Confirmar exclusão");
+            confirm.setHeaderText("Tem certeza que deseja excluir?");
+            Optional<ButtonType> result = confirm.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                boolean removido = categoriaDAO.remover(selecionada);
+                if (!removido) {
+                    // Avisa que não foi possível remover por causa de registros dependentes
+                    mostrarAlerta("Não é possível remover", 
+                        "Esta categoria está sendo usada em transações ou orçamentos. " +
+                        "Remova essas referências antes de excluir a categoria.");
+                } else {
+                    carregarTabela();
+                }
             }
         } else {
             mostrarAlerta("Seleção necessária", "Por favor, selecione uma categoria para remover.");
@@ -144,4 +176,4 @@ public class CadastroCategoriaController {
         alerta.setContentText(conteudo);
         alerta.showAndWait();
     }
-} 
+}

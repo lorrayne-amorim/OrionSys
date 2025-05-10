@@ -1,19 +1,29 @@
 package model.domain;
-// @auhtor Julia
+
 public class StatusOrcamento {
     private int id;
     private String nome;
 
+    // Construtores
     public StatusOrcamento(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public int getId() { return id; }
-    public String getNome() { return nome; }
+    // Getters e Setters
+    public int getId() {
+        return id;
+    }
 
-    @Override
-    public String toString() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
