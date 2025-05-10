@@ -1,3 +1,5 @@
+// @author lorrayne
+
 package controller;
 
 import model.dao.CategoriaDAO;
@@ -22,17 +24,26 @@ import java.util.List;
 
 public class InserirProcessoTransacaoController {
 
-    @FXML private ComboBox<Categoria> comboCategoria;
-    @FXML private ComboBox<String> comboLocal;
-    @FXML private ComboBox<String> comboFormaPagamento;
-    @FXML private TextField txtValor;
-    @FXML private DatePicker datePicker;
+    @FXML 
+    private ComboBox<Categoria> comboCategoria;
+    
+    @FXML 
+    private ComboBox<String> comboLocal;
+    
+    @FXML 
+    private ComboBox<String> comboFormaPagamento;
+    
+    @FXML 
+    private TextField txtValor;
+    
+    @FXML 
+    private DatePicker datePicker;
 
-    private final TransacaoDAO transacaoDAO = new TransacaoDAO();
-    private final CategoriaDAO categoriaDAO = new CategoriaDAO();
-    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
-    private final Database database = DatabaseFactory.getDatabase("postgresql");
-    private final Connection connection = database.conectar();
+    private TransacaoDAO transacaoDAO = new TransacaoDAO();
+    private CategoriaDAO categoriaDAO = new CategoriaDAO();
+    private UsuarioDAO usuarioDAO = new UsuarioDAO();
+    private Database database = DatabaseFactory.getDatabase("postgresql");
+    private Connection connection = database.conectar();
 
     private Transacao transacaoEdicao = null;
     private int idUsuarioLogado;

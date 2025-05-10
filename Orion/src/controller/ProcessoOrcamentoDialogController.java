@@ -1,3 +1,5 @@
+// @author Julia
+
 package controller;
 
 import model.dao.CategoriaDAO;
@@ -20,21 +22,30 @@ import java.util.Map;
 
 public class ProcessoOrcamentoDialogController {
 
-    @FXML private TextField txtTitulo;
-    @FXML private ComboBox<String> comboCategoria;
-    @FXML private TextField txtValorLimite;
-    @FXML private DatePicker dataInicio;
-    @FXML private DatePicker dataFim;
+    @FXML 
+    private TextField txtTitulo;
+    
+    @FXML 
+    private ComboBox<String> comboCategoria;
+    
+    @FXML 
+    private TextField txtValorLimite;
+    
+    @FXML 
+    private DatePicker dataInicio;
+    
+    @FXML 
+    private DatePicker dataFim;
 
     private Stage dialogStage;
     private Orcamento orcamento;
     private boolean confirmado = false;
 
-    private final Database database = DatabaseFactory.getDatabase("postgresql");
-    private final Connection connection = database.conectar();
-    private final CategoriaDAO categoriaDAO = new CategoriaDAO();
+    private Database database = DatabaseFactory.getDatabase("postgresql");
+    private Connection connection = database.conectar();
+    private CategoriaDAO categoriaDAO = new CategoriaDAO();
 
-    private final Map<String, Integer> categoriaNomeToId = new HashMap<>();
+    private Map<String, Integer> categoriaNomeToId = new HashMap<>();
 
     @FXML
     public void initialize() {

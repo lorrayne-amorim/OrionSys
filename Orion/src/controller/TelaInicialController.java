@@ -1,6 +1,6 @@
 package controller;
 
-// @author Julia 
+// @author Lorrayne 
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -20,10 +20,17 @@ import model.domain.Usuario;
 
 public class TelaInicialController {
 
-    @FXML private TextField textFieldEmail;
-    @FXML private PasswordField textFieldSenha;
-    @FXML private Button btnEntrar;
-    @FXML private Button btnCadastrar;
+    @FXML 
+    private TextField textFieldEmail;
+    
+    @FXML 
+    private PasswordField textFieldSenha;
+    
+    @FXML 
+    private Button btnEntrar;
+    
+    @FXML 
+    private Button btnCadastrar;
 
     @FXML
     private void handleCadastrar(ActionEvent event) {

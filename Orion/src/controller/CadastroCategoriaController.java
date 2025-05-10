@@ -28,22 +28,34 @@ import java.util.logging.Logger;
 
 public class CadastroCategoriaController implements Initializable {
 
-    @FXML private TableView<Categoria> tableViewCategorias;
-    @FXML private TableColumn<Categoria, String> colNome;
-    @FXML private TableColumn<Categoria, String> colTipo;
+    @FXML 
+    private TableView<Categoria> tableViewCategorias;
+    
+    @FXML 
+    private TableColumn<Categoria, String> colNome;
+    
+    @FXML 
+    private TableColumn<Categoria, String> colTipo;
 
-    @FXML private Label labelNome;
-    @FXML private Label labelTipo;
-    @FXML private Label labelDescricao;
-    @FXML private Label labelPrioridade;
-    @FXML private Label labelRecorrente;
+    @FXML 
+    private Label labelNome;
+    
+    @FXML 
+    private Label labelTipo;
+    
+    @FXML 
+    private Label labelDescricao;
+   
+    @FXML 
+    private Label labelPrioridade;
+    
+    @FXML
+    private Label labelRecorrente;
 
     private CategoriaDAO categoriaDAO = new CategoriaDAO();
     private ObservableList<Categoria> listaCategorias;
-    
-    // Atributos para manipulação de Banco de Dados
-    private final Database database = DatabaseFactory.getDatabase("postgresql");
-    private final Connection connection = database.conectar();
+    private Database database = DatabaseFactory.getDatabase("postgresql");
+    private Connection connection = database.conectar();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

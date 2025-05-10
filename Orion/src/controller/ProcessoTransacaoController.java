@@ -1,3 +1,4 @@
+// @author lorrayne
 package controller;
 
 import javafx.collections.FXCollections;
@@ -19,14 +20,25 @@ import javafx.scene.Parent;
 
 public class ProcessoTransacaoController {
 
-    @FXML private TableView<Transacao> tabelaTransacoes;
-    @FXML private TableColumn<Transacao, String> colData;
-    @FXML private TableColumn<Transacao, String> colCategoria;
-    @FXML private TableColumn<Transacao, String> colLocal;
-    @FXML private TableColumn<Transacao, String> colFormaPagamento;
-    @FXML private TableColumn<Transacao, String> colValor;
+    @FXML 
+    private TableView<Transacao> tabelaTransacoes;
+    
+    @FXML 
+    private TableColumn<Transacao, String> colData;
+    
+    @FXML 
+    private TableColumn<Transacao, String> colCategoria;
+    
+    @FXML 
+    private TableColumn<Transacao, String> colLocal;
+    
+    @FXML 
+    private TableColumn<Transacao, String> colFormaPagamento;
+    
+    @FXML 
+    private TableColumn<Transacao, String> colValor;
 
-    private final TransacaoDAO transacaoDAO = new TransacaoDAO();
+    private TransacaoDAO transacaoDAO = new TransacaoDAO();
     private ObservableList<Transacao> listaTransacoes;
 
     private int idUsuarioLogado;
@@ -36,7 +48,6 @@ public class ProcessoTransacaoController {
     public void setMainController(VBoxMainController controller) {
         this.mainController = controller;
     }
-
 
     public void setIdUsuarioLogado(int idUsuario) {
         this.idUsuarioLogado = idUsuario;

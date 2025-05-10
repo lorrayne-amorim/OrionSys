@@ -1,3 +1,5 @@
+// @author lorrayne
+
 package model.domain;
 
 import java.math.BigDecimal;

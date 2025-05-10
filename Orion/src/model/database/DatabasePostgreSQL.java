@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Rafael Vargas Mesquita
+ * @author Lorrayne
  */
 public class DatabasePostgreSQL implements Database {
     private Connection connection;

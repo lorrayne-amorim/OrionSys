@@ -1,6 +1,6 @@
 package model.domain;
 
-// @author lorrayne
+// @author Julia
 
 import java.io.Serializable;
 import java.sql.Date;

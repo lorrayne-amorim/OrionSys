@@ -9,11 +9,20 @@ import model.domain.Categoria;
 
 public class CadastroCategoriaDialogController {
 
-    @FXML private TextField txtNome;
-    @FXML private ComboBox<String> comboTipo;
-    @FXML private TextField txtDescricao;
-    @FXML private ComboBox<String> comboPrioridade;
-    @FXML private CheckBox checkRecorrente;
+    @FXML 
+    private TextField txtNome;
+    
+    @FXML 
+    private ComboBox<String> comboTipo;
+    
+    @FXML 
+    private TextField txtDescricao;
+    
+    @FXML 
+    private ComboBox<String> comboPrioridade;
+    
+    @FXML 
+    private CheckBox checkRecorrente;
 
     private Stage dialogStage;
     private Categoria categoria;

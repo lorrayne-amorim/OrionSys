@@ -1,6 +1,6 @@
 package controller;
 
-// @author lorrayne
+// @author Julia
 
 import model.dao.OrcamentoDAO;
 import model.dao.CategoriaDAO;
@@ -44,8 +44,8 @@ public class ProcessoOrcamentoController implements Initializable {
     private CategoriaDAO categoriaDAO = new CategoriaDAO();
     private ObservableList<Orcamento> listaOrcamentos;
 
-    private final Database database = DatabaseFactory.getDatabase("postgresql");
-    private final Connection connection = database.conectar();
+    private Database database = DatabaseFactory.getDatabase("postgresql");
+    private Connection connection = database.conectar();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
