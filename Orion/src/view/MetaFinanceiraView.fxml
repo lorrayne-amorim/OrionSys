@@ -36,8 +36,22 @@
       </Label>
       <DatePicker fx:id="dataFim" layoutX="343.0" layoutY="215.0" prefHeight="25.0" prefWidth="158.0" />
 
+<<<<<<< HEAD:Orion/src/view/MetaFinanceiraView.fxml
       <Button layoutX="372.0" layoutY="299.0" mnemonicParsing="false" text="Salvar" onAction="#salvarMeta"/>
       <Button layoutX="431.0" layoutY="299.0" mnemonicParsing="false" text="Editar" onAction="#editarMeta"/>
       <Button layoutX="489.0" layoutY="299.0" mnemonicParsing="false" text="Excluir" onAction="#excluirMeta"/>
+=======
+      <Label layoutX="35.0" layoutY="258.0" text="Forma de Pagamento:" />
+      <ComboBox fx:id="comboFormaPagamento" layoutX="166.0" layoutY="253.0" prefHeight="25.0" prefWidth="337.0" />
+
+      <Label layoutX="35.0" layoutY="288.0" text="Tipo de Orçamento:" />
+      <ComboBox fx:id="comboTipoOrcamento" layoutX="166.0" layoutY="283.0" prefHeight="25.0" prefWidth="337.0" />
+
+      <Label layoutX="35.0" layoutY="318.0" text="Status do Orçamento:" />
+      <ComboBox fx:id="comboStatusOrcamento" layoutX="166.0" layoutY="313.0" prefHeight="25.0" prefWidth="337.0" />
+
+      <Button layoutX="370.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleConfirmar" text="Salvar" />
+      <Button layoutX="429.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleCancelar" text="Cancelar" />
+>>>>>>> ab2689a (Implementação dos 5 processos em Orçamento - não consegui testar pra validar):Orion/src/view/ProcessoOrcamentoDialogView.fxml
    </children>
 </AnchorPane>
