@@ -23,6 +23,7 @@ public class ProcessoTransacaoController {
     @FXML private TableColumn<Transacao, String> colData;
     @FXML private TableColumn<Transacao, String> colCategoria;
     @FXML private TableColumn<Transacao, String> colLocal;
+    @FXML private TableColumn<Transacao, String> colFormaPagamento;
     @FXML private TableColumn<Transacao, String> colValor;
 
     private final TransacaoDAO transacaoDAO = new TransacaoDAO();
@@ -51,6 +52,7 @@ public class ProcessoTransacaoController {
         colData.setCellValueFactory(new PropertyValueFactory<>("data"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("nomeCategoria"));
         colLocal.setCellValueFactory(new PropertyValueFactory<>("nomeLocal"));
+        colFormaPagamento.setCellValueFactory(new PropertyValueFactory<>("formaPagamento"));
         colValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
     }
 
