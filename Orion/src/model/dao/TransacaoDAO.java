@@ -268,13 +268,6 @@ public class TransacaoDAO {
         }
     }
 
-    /**
-     *
-     * @param inicio
-     * @param fim
-     * @param agrupamento
-     * @return
-     */
     public Map<String, BigDecimal[]> getTotaisPorPeriodo(LocalDate inicio, LocalDate fim, String agrupamento,
             String tipoDespesa, int idUsuario) {
         Map<String, BigDecimal[]> resultados = new LinkedHashMap<>();
@@ -326,6 +319,30 @@ public class TransacaoDAO {
             e.printStackTrace();
         }
         return resultados;
+    }
+
+    public Map<String, BigDecimal> getDespesasPorCategoria(LocalDate inicio, LocalDate fim, int idUsuario) {
+        Map<String, BigDecimal> mapa = new LinkedHashMap<>();
+        String sql = "SELECT c.nome, SUM(t.valor) AS total " +
+                     "FROM transacao t " +
+                     "JOIN categoria c ON t.id_categoria = c.id_categoria " +
+                     "WHERE c.tipo = 'despesa' AND t.id_usuario = ? AND t.data BETWEEN ? AND ? " +
+                     "GROUP BY c.nome ORDER BY total DESC";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            stmt.setDate(2, Date.valueOf(inicio));
+            stmt.setDate(3, Date.valueOf(fim));
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                mapa.put(rs.getString("nome"), rs.getBigDecimal("total"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mapa;
     }
 
 }

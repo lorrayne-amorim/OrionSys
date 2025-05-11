@@ -53,6 +53,17 @@ public class VBoxMainController implements Initializable {
     }
 
     @FXML
+    public void handleMenuItemDespesasPorCategoria() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GraficoPizzaDespesaCategoriaView.fxml"));
+        AnchorPane a = loader.load();
+
+        GraficoPizzaDespesasController controller = loader.getController();
+        controller.setIdUsuarioLogado(idUsuarioLogado);
+
+        anchorPane.getChildren().setAll(a);
+    }
+    
+    @FXML
     public void handleMenuItemGraficoTransacoesPorPeriodo() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GraficoReceitaDespesaPeriodoView.fxml"));
         AnchorPane a = loader.load();
