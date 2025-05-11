@@ -18,41 +18,57 @@ public class VBoxMainController implements Initializable {
 
     @FXML
     private MenuItem menuItemCadastroCategoria;
-    
+
     @FXML
     private MenuItem menuItemTransacao;
-    
+
     @FXML
     private MenuItem menuItemOrcamento;
-    
+
     @FXML
-    private MenuItem menuItemGraficosVendasPorMes;
-    @FXML private Label labelSaldo;
+    private MenuItem menuItemGraficoTransacoesPorPeriodo;
+
+    @FXML
+    private MenuItem menuItemDespesasPorCategoria;
+
+    @FXML
+    private Label labelSaldo;
 
     @FXML
     private MenuItem menuItemRelatoriosQuantidadeProdutos;
     private int idUsuarioLogado;
-    
+
     @FXML
     private AnchorPane anchorPane;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
     @FXML
     public void handleMenuItemCadastroCategoria() throws IOException {
         AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/CadastroCategoriaView.fxml"));
         anchorPane.getChildren().setAll(a);
     }
-    
+
+    @FXML
+    public void handleMenuItemGraficoTransacoesPorPeriodo() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GraficoReceitaDespesaPeriodoView.fxml"));
+        AnchorPane a = loader.load();
+
+        GraficoTransacoesController controller = loader.getController();
+        controller.setIdUsuarioLogado(idUsuarioLogado);
+
+        anchorPane.getChildren().setAll(a);
+    }
+
     @FXML
     public void handleMenuItemProcessoOrcamento() throws IOException {
         AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/ProcessoOrcamentoView.fxml"));
         anchorPane.getChildren().setAll(b);
     }
-    
+
     public void atualizarSaldo() {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         BigDecimal saldo = usuarioDAO.buscarSaldoPorId(idUsuarioLogado);
@@ -63,13 +79,11 @@ public class VBoxMainController implements Initializable {
         }
     }
 
-
     public void setIdUsuarioLogado(int idUsuario) {
-     this.idUsuarioLogado = idUsuario;
-     atualizarSaldo();
- }
+        this.idUsuarioLogado = idUsuario;
+        atualizarSaldo();
+    }
 
-    
     @FXML
     public void handleMenuItemProcessoTransacao() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProcessoTransacaoView.fxml"));
@@ -82,7 +96,4 @@ public class VBoxMainController implements Initializable {
         anchorPane.getChildren().setAll(c);
     }
 
-    
-
-    
 }

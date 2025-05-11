@@ -25,15 +25,15 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Histórico Financeiro por Categoria" />
+                  <MenuItem fx:id="menuItemGraficoTransacoesPorPeriodo" mnemonicParsing="false" text="Histórico Financeiro por Categoria" />
                   <MenuItem mnemonicParsing="false" text="Histórico Financeiro por Periodo" />
                   
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Gráficos">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Despesa x Receita por período " />
-                  <MenuItem mnemonicParsing="false" text="Despesas por categoria" />
+                  <MenuItem fx:id="menuItemHr" mnemonicParsing="false" onAction="#handleMenuItemGraficoTransacoesPorPeriodo" text="Despesa x Receita por período" />
+                  <MenuItem fx:id="menuItemDespesasPorCategoria" mnemonicParsing="false" text="Despesas por categoria" />
                </items>
             </Menu>
 

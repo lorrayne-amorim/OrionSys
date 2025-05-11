@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.GraficoTransacoesController">
+    <children>
+        <Label layoutX="25.0" layoutY="20.0" text="Data Início:" />
+        <DatePicker fx:id="dataInicio" layoutX="97.0" layoutY="17.0" />
+
+        <Label layoutX="279.0" layoutY="21.0" text="Data Fim:" />
+        <DatePicker fx:id="dataFim" layoutX="337.0" layoutY="18.0" />
+
+        <Label layoutX="520.0" layoutY="22.0" text="Agrupar por:" />
+        <ComboBox fx:id="comboAgrupamento" layoutX="600.0" layoutY="18.0" prefWidth="120" />
+
+        <Button fx:id="btnGerar" layoutX="742.0" layoutY="18.0" onAction="#handleGerarGrafico" prefHeight="25.0" prefWidth="112.0" text="Gerar Gráfico" />
+
+        <BarChart fx:id="barChart" layoutX="30" layoutY="60" prefHeight="500" prefWidth="840">
+            <xAxis>
+                <CategoryAxis fx:id="eixoX" label="Período" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="eixoY" label="Valor (R$)" />
+            </yAxis>
+        </BarChart>
+
+    </children>
+</AnchorPane>

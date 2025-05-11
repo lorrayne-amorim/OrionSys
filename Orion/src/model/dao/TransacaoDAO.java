@@ -7,10 +7,13 @@ import model.domain.Transacao;
 import model.database.Database;
 import model.database.DatabaseFactory;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TransacaoDAO {
 
@@ -264,4 +267,65 @@ public class TransacaoDAO {
             return BigDecimal.ZERO;
         }
     }
+
+    /**
+     *
+     * @param inicio
+     * @param fim
+     * @param agrupamento
+     * @return
+     */
+    public Map<String, BigDecimal[]> getTotaisPorPeriodo(LocalDate inicio, LocalDate fim, String agrupamento,
+            String tipoDespesa, int idUsuario) {
+        Map<String, BigDecimal[]> resultados = new LinkedHashMap<>();
+        String agrupamentoSQL;
+
+        switch (agrupamento.toLowerCase()) {
+            case "dia":
+                agrupamentoSQL = "TO_CHAR(data, 'YYYY-MM-DD')";
+                break;
+            case "semana":
+                agrupamentoSQL = "TO_CHAR(data, 'IYYY-IW')"; // Ano-Semana ISO
+                break;
+            case "mes":
+                agrupamentoSQL = "TO_CHAR(data, 'YYYY-MM')";
+                break;
+            case "trimestre":
+                agrupamentoSQL = "TO_CHAR(data, 'YYYY-') || 'T' || EXTRACT(QUARTER FROM data)";
+                break;
+            case "semestre":
+                agrupamentoSQL = "TO_CHAR(data, 'YYYY-') || 'S' || CASE WHEN EXTRACT(MONTH FROM data) <= 6 THEN 1 ELSE 2 END";
+                break;
+            case "ano":
+                agrupamentoSQL = "TO_CHAR(data, 'YYYY')";
+                break;
+            default:
+                agrupamentoSQL = "TO_CHAR(data, 'YYYY-MM')";
+        }
+
+        String sql = "SELECT " + agrupamentoSQL + " AS periodo, " +
+                "SUM(CASE WHEN c.tipo = 'receita' THEN t.valor ELSE 0 END) AS receita, " +
+                "SUM(CASE WHEN c.tipo = 'despesa' THEN t.valor ELSE 0 END) AS despesa " +
+                "FROM transacao t JOIN categoria c ON t.id_categoria = c.id_categoria " +
+                "WHERE data BETWEEN ? AND ? AND t.id_usuario = ? " +
+                "GROUP BY periodo ORDER BY periodo";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setDate(1, Date.valueOf(inicio));
+            stmt.setDate(2, Date.valueOf(fim));
+            stmt.setInt(3, idUsuario);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String periodo = rs.getString("periodo");
+                BigDecimal receita = rs.getBigDecimal("receita");
+                BigDecimal valorDespesa = rs.getBigDecimal("despesa");
+                resultados.put(periodo, new BigDecimal[] { receita, valorDespesa });
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultados;
+    }
+
 }
