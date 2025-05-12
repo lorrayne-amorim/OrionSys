@@ -33,7 +33,7 @@ public class Transacao {
 
 
     // Getters e Setters
-
+   
     public int getIdTransacao() {
         return idTransacao;
     }

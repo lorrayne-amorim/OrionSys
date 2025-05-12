@@ -15,7 +15,7 @@
         <Label layoutX="264.0" layoutY="18.0" text="Fim:" />
         <DatePicker fx:id="dataFim" layoutX="292.0" layoutY="14.0" />
 
-        <Button fx:id="btnBuscar" layoutX="477.0" layoutY="14.0" onAction="#carregarTableViewTransacoes" text="Buscar" />
+        <Button fx:id="btnBuscar" layoutX="477.0" layoutY="14.0" onAction="#handleBuscar" text="Buscar" />
         <Button fx:id="btnImprimir" layoutX="714.0" layoutY="15.0" onAction="#handleImprimir" prefHeight="25.0" prefWidth="156.0" text="Exportar PDF" />
 
         <TableView fx:id="tabelaTransacoes" layoutX="30" layoutY="60" prefHeight="510" prefWidth="840">

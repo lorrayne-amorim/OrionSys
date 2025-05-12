@@ -345,4 +345,38 @@ public class TransacaoDAO {
         return mapa;
     }
 
+    public List<Transacao> listarPorPeriodo(LocalDate inicio, LocalDate fim) {
+    List<Transacao> transacoes = new ArrayList<>();
+    String sql = "SELECT t.id_transacao, t.id_usuario, t.id_categoria, c.nome AS nome_categoria, " +
+                 "t.id_local, l.nome AS nome_local, t.valor, t.forma_pagamento, t.data, c.tipo " +
+                 "FROM transacao t " +
+                 "JOIN categoria c ON t.id_categoria = c.id_categoria " +
+                 "JOIN local_transacao l ON t.id_local = l.id " +
+                 "WHERE t.data BETWEEN ? AND ? " +
+                 "ORDER BY t.data";
+
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        stmt.setDate(1, Date.valueOf(inicio));
+        stmt.setDate(2, Date.valueOf(fim));
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Transacao t = new Transacao(
+                rs.getInt("id_transacao"),
+                rs.getInt("id_usuario"),
+                rs.getInt("id_categoria"),
+                rs.getString("nome_categoria"),
+                rs.getInt("id_local"),
+                rs.getString("nome_local"),
+                rs.getBigDecimal("valor"),
+                rs.getString("forma_pagamento"),
+                rs.getTimestamp("data").toLocalDateTime()
+            );
+            transacoes.add(t);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return transacoes;
+}
+
 }
