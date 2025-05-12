@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class TransacaoDAO {
 
-    private Connection connection;
+    private final Connection connection;
 
     public TransacaoDAO() {
         Database database = DatabaseFactory.getDatabase("postgresql");

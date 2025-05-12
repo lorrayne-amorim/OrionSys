@@ -35,7 +35,7 @@ public class VBoxMainController implements Initializable {
     private Label labelSaldo;
 
     @FXML
-    private MenuItem menuItemRelatoriosQuantidadeProdutos;
+    private MenuItem menuItemRelatorioTransacoes;
     private int idUsuarioLogado;
 
     @FXML
@@ -73,7 +73,20 @@ public class VBoxMainController implements Initializable {
 
         anchorPane.getChildren().setAll(a);
     }
+    
+    // Relatórios
+    @FXML
+    public void handleMenuItemRelatorioTransacoesPeriodo() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/RelatorioTransacoesPeriodoView.fxml"));
+        AnchorPane a = loader.load();
 
+        RelatorioTransacoesPeriodoController controller = loader.getController();
+        controller.setIdUsuarioLogado(idUsuarioLogado);
+
+        anchorPane.getChildren().setAll(a);
+    }
+
+    
     @FXML
     public void handleMenuItemProcessoOrcamento() throws IOException {
         AnchorPane b = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/ProcessoOrcamentoView.fxml"));
