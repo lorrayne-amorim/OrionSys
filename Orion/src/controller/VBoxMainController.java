@@ -36,6 +36,9 @@ public class VBoxMainController implements Initializable {
 
     @FXML
     private MenuItem menuItemRelatorioTransacoes;
+    
+    @FXML
+    private MenuItem menuItemRelatorioDespesas;
     private int idUsuarioLogado;
 
     @FXML
@@ -85,7 +88,15 @@ public class VBoxMainController implements Initializable {
 
         anchorPane.getChildren().setAll(a);
     }
-
+    
+    @FXML
+    public void handleMenuItemRelatorioDespesasCategoria () throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/RelatorioDespesasCategoriaView.fxml"));
+        AnchorPane a = loader.load();
+        RelatorioTransacoesCategoriaController controller = loader.getController();
+        controller.setIdUsuarioLogado(idUsuarioLogado);
+        anchorPane.getChildren().setAll(a);
+    }
     
     @FXML
     public void handleMenuItemProcessoOrcamento() throws IOException {

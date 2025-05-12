@@ -25,7 +25,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">
                <items>
-                  <MenuItem fx:id="" mnemonicParsing="false" text="Histórico Financeiro por Categoria" />
+                  <MenuItem fx:id="menuItemRelatorioDespesas" mnemonicParsing="false" onAction="#handleMenuItemRelatorioDespesasCategoria" text="Histórico Financeiro por Categoria" />
                   <MenuItem fx:id="menuItemRelatorioTransacoes" mnemonicParsing="false" onAction="#handleMenuItemRelatorioTransacoesPeriodo" text="Histórico Financeiro por Periodo" />
                   
                </items>

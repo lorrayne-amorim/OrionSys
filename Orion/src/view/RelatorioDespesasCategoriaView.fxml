@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600" prefWidth="900" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RelatorioTransacoesPeriodoController">
+<AnchorPane prefHeight="600" prefWidth="900" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RelatorioTransacoesCategoriaController">
     <children>
-        <Label layoutX="30.0" layoutY="18.0" text="Início:" />
-        <DatePicker fx:id="dataInicio" layoutX="67.0" layoutY="15.0" />
-        
-        <Label layoutX="264.0" layoutY="18.0" text="Fim:" />
-        <DatePicker fx:id="dataFim" layoutX="292.0" layoutY="14.0" />
+   
 
         <Button fx:id="btnBuscar" layoutX="477.0" layoutY="14.0" onAction="#handleBuscar" text="Buscar" />
         <Button fx:id="btnImprimir" layoutX="714.0" layoutY="15.0" onAction="#handleImprimir" prefHeight="25.0" prefWidth="156.0" text="Exportar PDF" />
@@ -24,9 +19,9 @@
                 <TableColumn fx:id="colLocal" prefWidth="146.0" text="Local" />
                 <TableColumn fx:id="colCategoria" prefWidth="126.0" text="Categoria" />
                 <TableColumn fx:id="colValor" prefWidth="144.0" text="Valor" />
-         
                 <TableColumn fx:id="colFormaPagamento" prefWidth="143.0" text="Forma Pagamento" />
             </columns>
         </TableView>
+      <ComboBox fx:id="categoriaNome" layoutX="30.0" layoutY="15.0" prefHeight="25.0" prefWidth="441.0" />
     </children>
 </AnchorPane>
