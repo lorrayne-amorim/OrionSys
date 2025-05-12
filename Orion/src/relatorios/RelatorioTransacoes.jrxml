@@ -17,8 +17,7 @@ JOIN categoria c ON t.id_categoria = c.id_categoria
 JOIN local_transacao l ON t.id_local = l.id
 WHERE 
   ($P{dataInicio} IS NULL OR t.data >= $P{dataInicio}) AND
-  ($P{dataFim} IS NULL OR t.data <= $P{dataFim})
-]]>
+  ($P{dataFim} IS NULL OR t.data <= $P{dataFim})]]>
 	</queryString>
 	<field name="data" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="data"/>
@@ -52,7 +51,7 @@ WHERE
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="bf9b2820-afd4-4ce7-beb5-6b8d531d3963"/>
 				<staticText>
-					<reportElement x="20" y="20" width="390" height="43" forecolor="#FFFFFF" uuid="b137d091-557c-493f-92b5-5830f1533ba8"/>
+					<reportElement x="100" y="25" width="390" height="43" forecolor="#FFFFFF" uuid="b137d091-557c-493f-92b5-5830f1533ba8"/>
 					<textElement>
 						<font size="30" isBold="true"/>
 					</textElement>
