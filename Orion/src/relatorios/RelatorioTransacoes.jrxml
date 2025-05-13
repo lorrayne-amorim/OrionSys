@@ -3,21 +3,23 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RelatorioTransacoes" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d06b5454-d737-4479-b4d4-addeaa22dceb">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="OrionSys"/>
-	<parameter name="dataFim" class="java.sql.Date"/>
-	<parameter name="dataInicio" class="java.sql.Date"/>
-	<queryString language="SQL">
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="390"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="599"/>
+	<parameter name="dataFim" class="java.sql.Date" isForPrompting="false"/>
+	<parameter name="dataInicio" class="java.sql.Date" isForPrompting="false"/>
+	<queryString>
 		<![CDATA[SELECT t.data,
-       l.nome AS local,
-       c.nome AS categoria,
+       l.nome    AS local,
+       c.nome    AS categoria,
        t.valor,
        c.tipo,
        t.forma_pagamento
-FROM transacao t
-JOIN categoria c ON t.id_categoria = c.id_categoria
-JOIN local_transacao l ON t.id_local = l.id
-WHERE 
-  ($P{dataInicio} IS NULL OR t.data >= $P{dataInicio}) AND
-  ($P{dataFim} IS NULL OR t.data <= $P{dataFim})]]>
+  FROM transacao t
+  JOIN categoria c ON t.id_categoria = c.id_categoria
+  JOIN local_transacao l ON t.id_local      = l.id
+ WHERE t.data >= COALESCE($P{dataInicio}, t.data)
+   AND t.data <= COALESCE($P{dataFim},    t.data)
+]]>
 	</queryString>
 	<field name="data" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="data"/>

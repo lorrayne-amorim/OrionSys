@@ -96,24 +96,25 @@ public class RelatorioTransacoesPeriodoController {
         tabelaTransacoes.setItems(observableListTransacoes); 
     }
     
-    public void handleImprimir() throws JRException{
+    public void handleImprimir() throws JRException {
         URL url = getClass().getResource("/relatorios/RelatorioTransacoes.jasper");
         JasperReport report = (JasperReport) JRLoader.loadObject(url);
-        
+
         // Mapa de parâmetros
         Map<String, Object> parametros = new HashMap<>();
         if (dataInicio.getValue() != null) {
-        parametros.put("dataInicio", java.sql.Date.valueOf(dataInicio.getValue()));
-    }
+            // converte LocalDate → java.sql.Date
+            parametros.put("dataInicio", java.sql.Date.valueOf(dataInicio.getValue()));
+        }
         if (dataFim.getValue() != null) {
             parametros.put("dataFim", java.sql.Date.valueOf(dataFim.getValue()));
         }
-        
+
         JasperPrint print = JasperFillManager.fillReport(report, parametros, connection);
         JasperViewer viewer = new JasperViewer(print, false);
         viewer.setVisible(true);
-        
-    }
+}
+
 
     @FXML
     public void handleBuscar() {
