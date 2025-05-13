@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -9,66 +8,69 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="631.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroCategoriaController">
-   <children>
-      <SplitPane dividerPositions="0.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
+<AnchorPane fx:id="rootPane" prefHeight="640.0" prefWidth="1024.0" style="-fx-background-color: linear-gradient(to bottom right, #f1f8e9, #c5e1a5); -fx-padding: 0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroCategoriaController">
 
-          <AnchorPane prefHeight="398.0" prefWidth="297.0">
-            <children>
-              <TableView fx:id="tableViewCategorias" prefHeight="398.0" prefWidth="254.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <columns>
-                    <TableColumn fx:id="colNome" prefWidth="216.0" text="Nome" />
-                    <TableColumn fx:id="colTipo" prefWidth="189.0" text="Tipo" />
-                </columns>
-               </TableView>
-            </children>
-          </AnchorPane>
+    <children>
+        <SplitPane dividerPositions="0.32926829268292684" layoutX="53.0" layoutY="44.0" prefHeight="571.0" prefWidth="940.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="34.0">
 
-          <AnchorPane prefHeight="398.0" prefWidth="337.0">
-            <children>
-              <Label layoutX="233.0" layoutY="42.0" text="Detalhes da Categoria">
-                <font><Font name="System Bold" size="14.0" /></font>
-              </Label>
-              <GridPane layoutX="55.0" layoutY="116.0" prefHeight="210.0" prefWidth="516.0">
-                <columnConstraints>
-                  <ColumnConstraints prefWidth="130.0" />
-                  <ColumnConstraints prefWidth="250.0" />
-                </columnConstraints>
-                <rowConstraints>
-                  <RowConstraints prefHeight="30.0" />
-                  <RowConstraints prefHeight="30.0" />
-                  <RowConstraints prefHeight="30.0" />
-                  <RowConstraints prefHeight="30.0" />
-                  <RowConstraints prefHeight="30.0" />
-                </rowConstraints>
+            <!-- Painel esquerdo: Tabela de Categorias -->
+            <AnchorPane prefHeight="517.0" prefWidth="363.0" style="-fx-background-color: white; -fx-border-color: #a5d6a7; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10;">
                 <children>
-                    <Label text="Nome:" />
-                    <Label fx:id="labelNome" GridPane.columnIndex="1" />
-                    <Label text="Tipo:" GridPane.rowIndex="1" />
-                    <Label fx:id="labelTipo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Label text="Descrição:" GridPane.rowIndex="2" />
-                    <Label fx:id="labelDescricao" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <Label text="Prioridade:" GridPane.rowIndex="3" />
-                    <Label fx:id="labelPrioridade" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <Label text="Recorrente:" GridPane.rowIndex="4" />
-                    <Label fx:id="labelRecorrente" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <TableView fx:id="tableViewCategorias" layoutX="13.0" layoutY="43.0" prefHeight="517.0" prefWidth="294.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <columns>
+                            <TableColumn fx:id="colNome" prefWidth="131.0" text="Nome" />
+                            <TableColumn fx:id="colTipo" prefWidth="140.0" text="Tipo" />
+                        </columns>
+                    </TableView>
                 </children>
-              </GridPane>
+            </AnchorPane>
 
-              <Group layoutX="182.0" layoutY="327.0">
+            <!-- Painel direito: Detalhes da Categoria e Ações -->
+            <AnchorPane prefHeight="468.0" prefWidth="626.0" style="-fx-background-color: white; -fx-border-color: #a5d6a7; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10;">
                 <children>
-                    <Button fx:id="buttonRemover2" layoutX="12.0" onAction="#handleInserir" text="Inserir" />
-                    <Button fx:id="buttonRemover1" layoutX="135.0" onAction="#handleRemover" text="Remover" />
-                    <Button fx:id="buttonAlterar" layoutX="73.0" onAction="#handleAlterar" text="Alterar" />
+                    <Label layoutX="20.0" layoutY="20.0" style="-fx-text-fill: #2e7d32; -fx-font-size: 16px; -fx-font-weight: bold;" text="Detalhes da Categoria" />
+
+                    <GridPane layoutX="20.0" layoutY="60.0" prefHeight="220.0" prefWidth="560.0">
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="120" />
+                            <ColumnConstraints prefWidth="440" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints prefHeight="30" />
+                            <RowConstraints prefHeight="30" />
+                            <RowConstraints prefHeight="30" />
+                            <RowConstraints prefHeight="30" />
+                            <RowConstraints prefHeight="30" />
+                        </rowConstraints>
+                        <children>
+                            <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Nome:" GridPane.rowIndex="0" />
+                            <Label fx:id="labelNome" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                            <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Tipo:" GridPane.rowIndex="1" />
+                            <Label fx:id="labelTipo" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                            <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Descrição:" GridPane.rowIndex="2" />
+                            <Label fx:id="labelDescricao" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                            <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Prioridade:" GridPane.rowIndex="3" />
+                            <Label fx:id="labelPrioridade" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                            <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Recorrente:" GridPane.rowIndex="4" />
+                            <Label fx:id="labelRecorrente" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        </children>
+                    </GridPane>
+
+                    <!-- Botões de ação alinhados em HBox -->
+                    <HBox layoutX="183.0" layoutY="280.0" spacing="10">
+                        <Button fx:id="buttonInserir" onAction="#handleInserir" style="-fx-background-color: #388e3c; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Inserir" />
+                        <Button fx:id="buttonAlterar" onAction="#handleAlterar" style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Alterar" />
+                        <Button fx:id="buttonRemover" onAction="#handleRemover" style="-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Remover" />
+                    </HBox>
                 </children>
-              </Group>
-            </children>
-          </AnchorPane>
-        </items>
-      </SplitPane>
-   </children>
+            </AnchorPane>
+        </SplitPane>
+    </children>
 </AnchorPane>

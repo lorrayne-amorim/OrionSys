@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="631.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProcessoTransacaoController">
-    <VBox spacing="15">
+<AnchorPane fx:id="rootPane" prefHeight="700.0" prefWidth="1024.0" style="-fx-background-color: linear-gradient(to bottom right, #a5d6a7, #388e3c); -fx-padding: 0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProcessoTransacaoController">
 
-        <HBox alignment="CENTER_RIGHT" spacing="10" />
+    <children>
+        <!-- TABELA DE TRANSAÇÕES -->
+        <TableView fx:id="tabelaTransacoes" layoutX="25.0" layoutY="45.0" prefHeight="520" prefWidth="974.0" style="-fx-background-color: white; -fx-border-color: #388e3c; -fx-border-width: 2;">
+            <columns>
+                <TableColumn fx:id="colData" prefWidth="140.0" text="Data" />
+                <TableColumn fx:id="colCategoria" prefWidth="155.0" text="Categoria" />
+                <TableColumn fx:id="colLocal" prefWidth="178.0" text="Local" />
+                <TableColumn fx:id="colFormaPagamento" prefWidth="197.0" text="Forma de Pagamento" />
+                <TableColumn fx:id="colValor" prefWidth="190.0" text="Valor (R$)" />
+            </columns>
+        </TableView>
 
-    </VBox>
-
-     <TableView fx:id="tabelaTransacoes" layoutX="24.0" layoutY="94.0" prefHeight="429.0" prefWidth="846.0">
-         <columns>
-             <TableColumn fx:id="colData" prefWidth="140.0" text="Data" />
-             <TableColumn fx:id="colCategoria" prefWidth="155.0" text="Categoria" />
-             <TableColumn fx:id="colLocal" prefWidth="178.0" text="Local" />
-         <TableColumn fx:id="colFormaPagamento" minWidth="0.0" prefWidth="197.0" text="Forma de Pagamento" />
-             <TableColumn fx:id="colValor" minWidth="0.0" prefWidth="175.0" text="Valor (R$)" />
-         </columns>
-     </TableView>
-      <Button layoutX="688.0" layoutY="537.0" onAction="#handleCancelar" text="Cancelar Transação" />
-      <Button layoutX="521.0" layoutY="537.0" onAction="#handleInserir" text="Inserir Transação" />
-
-     <Label layoutX="385.0" layoutY="42.0" text="Minhas Transações">
-      <font>
-         <Font name="System Bold" size="18.0" />
-      </font>
-   </Label>
-   <Button layoutX="822.0" layoutY="537.0" onAction="#handleVoltar" text="Voltar" />
-   <Button layoutX="635.0" layoutY="537.0" onAction="#handleEditar" text="Editar" />
+        <!-- AÇÕES -->
+        <HBox alignment="CENTER_RIGHT" layoutX="499.0" layoutY="592.0" spacing="10">
+            <Button fx:id="btnInserir" onAction="#handleInserir" style="-fx-background-color: #1b5e20; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 140px; -fx-pref-height: 30px;" text="Inserir Transação" />
+            <Button fx:id="btnEditar" onAction="#handleEditar" style="-fx-background-color: #ffb300; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 100px; -fx-pref-height: 30px;" text="Editar" />
+            <Button fx:id="btnCancelar" onAction="#handleCancelar" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 150px; -fx-pref-height: 30px;" text="Cancelar Transação" />
+            <Button fx:id="btnVoltar" onAction="#handleVoltar" style="-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Voltar" />
+        </HBox>
+    </children>
 </AnchorPane>

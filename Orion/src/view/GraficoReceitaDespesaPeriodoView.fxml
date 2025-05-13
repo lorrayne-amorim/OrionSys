@@ -8,28 +8,35 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.GraficoTransacoesController">
+<AnchorPane fx:id="rootPane" prefHeight="640.0" prefWidth="1024.0" style="-fx-background-color: linear-gradient(to bottom right, #a5d6a7, #388e3c); -fx-padding: 0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GraficoTransacoesController">
+
     <children>
-        <Label layoutX="25.0" layoutY="20.0" text="Data Início:" />
-        <DatePicker fx:id="dataInicio" layoutX="97.0" layoutY="17.0" />
 
-        <Label layoutX="279.0" layoutY="21.0" text="Data Fim:" />
-        <DatePicker fx:id="dataFim" layoutX="337.0" layoutY="18.0" />
+        <!-- FILTROS e AGRUPAMENTO -->
+        <HBox layoutX="20.0" layoutY="33.0" spacing="15">
+            <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Data Início:" />
+            <DatePicker fx:id="dataInicio" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
 
-        <Label layoutX="520.0" layoutY="22.0" text="Agrupar por:" />
-        <ComboBox fx:id="comboAgrupamento" layoutX="600.0" layoutY="18.0" prefWidth="120" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Data Fim:" />
+            <DatePicker fx:id="dataFim" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
 
-        <Button fx:id="btnGerar" layoutX="742.0" layoutY="18.0" onAction="#handleGerarGrafico" prefHeight="25.0" prefWidth="112.0" text="Gerar Gráfico" />
+            <Label style="-fx-text-fill: white; -fx-font-size: 14px;" text="Agrupar por:" />
+            <ComboBox fx:id="comboAgrupamento" prefWidth="120" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
+        </HBox>
 
-        <BarChart fx:id="barChart" layoutX="30" layoutY="60" prefHeight="500" prefWidth="840">
+        <!-- GRÁFICO -->
+        <BarChart fx:id="barChart" layoutX="20" layoutY="76.0" prefHeight="511.0" prefWidth="989.0" style="-fx-border-color: #388e3c; -fx-border-width: 2; -fx-padding: 10;">
             <xAxis>
-                <CategoryAxis fx:id="eixoX" label="Período" />
+                <CategoryAxis fx:id="eixoX" label="Período" style="-fx-tick-label-fill: white; -fx-label-font-size: 12px;" />
             </xAxis>
             <yAxis>
-                <NumberAxis fx:id="eixoY" label="Valor (R$)" />
+                <NumberAxis fx:id="eixoY" label="Valor (R$)" style="-fx-tick-label-fill: white; -fx-label-font-size: 12px;" />
             </yAxis>
         </BarChart>
+
+         <Button fx:id="btnGerar" layoutX="836.0" layoutY="31.0" onAction="#handleGerarGrafico" prefHeight="29.0" prefWidth="153.0" style="-fx-background-color: #1b5e20; -fx-text-fill: white; -fx-background-radius: 4; -fx-padding: 6 12;" text="Gerar Gráfico" />
 
     </children>
 </AnchorPane>

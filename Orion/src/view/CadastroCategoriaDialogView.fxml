@@ -6,30 +6,46 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroCategoriaDialogController">
+<AnchorPane fx:id="root" prefHeight="398.0" prefWidth="604.0" style="-fx-background-color: linear-gradient(to bottom right, #66bb6a, #2e7d32);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroCategoriaDialogController">
 
+    <!-- Header -->
     <children>
-        <Label layoutX="254.0" layoutY="36.0" text="Cadastro de Categoria">
-            <font><Font name="System Bold" size="16.0" /></font>
-        </Label>
+        <Rectangle fill="#1b5e20" height="60" layoutX="0" layoutY="0" width="620.0" />
+        <Text layoutX="219.0" layoutY="37.0" style="-fx-fill: white; -fx-font-size: 18px; -fx-font-family: 'Segoe UI Semibold';" text="Cadastro de Categoria" />
+        
+        <!-- Form Fields -->
+        <Label layoutX="64.0" layoutY="123.0" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Nome:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+        <TextField fx:id="txtNome" layoutX="135.0" layoutY="119.0" prefHeight="25" prefWidth="422" style="-fx-background-color: white; -fx-border-color: #a5d6a7; -fx-border-width: 1.5; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 4;" />
 
-        <Label layoutX="80.0" layoutY="122.0" text="Nome:" />
-        <TextField fx:id="txtNome" layoutX="151.0" layoutY="118.0" prefHeight="25.0" prefWidth="422.0" />
+        <Label layoutX="64.0" layoutY="163.0" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Tipo:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+        <ComboBox fx:id="comboTipo" layoutX="135.0" layoutY="159.0" prefHeight="25" prefWidth="422" style="-fx-background-color: white; -fx-border-color: #a5d6a7; -fx-border-width: 1.5; -fx-border-radius: 4; -fx-background-radius: 4;" />
 
-        <Label layoutX="80.0" layoutY="162.0" text="Tipo:" />
-        <ComboBox fx:id="comboTipo" layoutX="151.0" layoutY="158.0" prefHeight="25.0" prefWidth="422.0" />
+        <Label layoutX="64.0" layoutY="203.0" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Descrição:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+        <TextField fx:id="txtDescricao" layoutX="135.0" layoutY="199.0" prefHeight="25" prefWidth="422" style="-fx-background-color: white; -fx-border-color: #a5d6a7; -fx-border-width: 1.5; -fx-border-radius: 4; -fx-background-radius: 4; -fx-padding: 4;" />
 
-        <Label layoutX="80.0" layoutY="202.0" text="Descrição:" />
-        <TextField fx:id="txtDescricao" layoutX="151.0" layoutY="198.0" prefHeight="25.0" prefWidth="422.0" />
+        <Label layoutX="64.0" layoutY="243.0" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Prioridade:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+        <ComboBox fx:id="comboPrioridade" layoutX="135.0" layoutY="239.0" prefHeight="25" prefWidth="422" style="-fx-background-color: white; -fx-border-color: #a5d6a7; -fx-border-width: 1.5; -fx-border-radius: 4; -fx-background-radius: 4;" />
 
-        <Label layoutX="80.0" layoutY="242.0" text="Prioridade:" />
-        <ComboBox fx:id="comboPrioridade" layoutX="151.0" layoutY="238.0" prefHeight="25.0" prefWidth="422.0" />
+        <CheckBox fx:id="checkRecorrente" layoutX="135.0" layoutY="278.0" style="-fx-text-fill: white; -fx-font-size: 14px;" text="Recorrente" />
 
-        <CheckBox fx:id="checkRecorrente" layoutX="151.0" layoutY="274.0" text="Recorrente" />
-
-        <Button layoutX="429.0" layoutY="310.0" onAction="#handleConfirmar" text="Confirmar" />
-        <Button layoutX="511.0" layoutY="310.0" onAction="#handleCancelar" text="Cancelar" />
+        <!-- Buttons -->
+        <Button layoutX="363.0" layoutY="310.0" onAction="#handleConfirmar" style="-fx-background-color: #1b5e20; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 4; -fx-pref-height: 30px; -fx-pref-width: 100px;" text="Confirmar" />
+        <Button layoutX="475.0" layoutY="310.0" onAction="#handleCancelar" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-height: 30px; -fx-pref-width: 100px;" text="Cancelar" />
     </children>
 </AnchorPane>
