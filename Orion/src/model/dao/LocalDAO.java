@@ -27,10 +27,26 @@ public class LocalDAO {
         this.connection = connection;
     }
 
+    
     public LocalDAO() {
         Database database = DatabaseFactory.getDatabase("postgresql");
         this.connection = database.conectar();
     }
+    
+    public int buscarIdPorNome(String nome) {
+    String sql = "SELECT id_local FROM local_transacao WHERE nome = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        stmt.setString(1, nome);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id_local");
+        }
+    } catch (SQLException e) {
+        System.err.println("Erro ao buscar ID do local: " + e.getMessage());
+    }
+    return -1;
+}
+
 
     public List<Local> listar() {
         List<Local> locais = new ArrayList<>();

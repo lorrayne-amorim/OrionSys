@@ -117,7 +117,7 @@ public class InserirProcessoTransacaoController {
             }
 
             BigDecimal valor = new BigDecimal(valorStr);
-            int idLocal = buscarIdLocalPorNome(nomeLocal);
+            int idLocal = localDAO.buscarIdPorNome(nomeLocal);
             if (idLocal == -1) {
                 mostrarAlerta("Local não encontrado no banco.");
                 return;
@@ -172,19 +172,6 @@ public class InserirProcessoTransacaoController {
         } catch (Exception e) {
             mostrarAlerta("Erro inesperado: " + e.getMessage());
         }
-    }
-
-    private int buscarIdLocalPorNome(String nome) {
-        String sql = "SELECT id_local FROM local_transacao WHERE nome = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, nome);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next())
-                return rs.getInt("id_local");
-        } catch (SQLException e) {
-            mostrarAlerta("Erro ao buscar local: " + e.getMessage());
-        }
-        return -1;
     }
 
     private void mostrarAlerta(String msg) {
