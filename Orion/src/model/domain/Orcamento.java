@@ -14,7 +14,6 @@ public class Orcamento {
     private int idStatusOrcamento;
     private int idFormaPagamento;
 
-    // Construtores
     public Orcamento() {}
 
     public Orcamento(int id_orcamento, String titulo, int idCategoria, double valorLimite,

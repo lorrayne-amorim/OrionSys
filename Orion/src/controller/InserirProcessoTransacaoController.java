@@ -73,7 +73,7 @@ public class InserirProcessoTransacaoController {
         List<FormaPagamento> formaPagamentos = formaPagamentoDAO.listar();
         ObservableList<String> nomesForma = FXCollections.observableArrayList();
         for (FormaPagamento f : formaPagamentos) {
-            nomesForma.add(f.getDescricao()); // ou o método correto que retorna o nome
+            nomesForma.add(f.getDescricao()); 
         }
         comboFormaPagamento.setItems(nomesForma);
     }
@@ -82,7 +82,7 @@ public class InserirProcessoTransacaoController {
         List<Local> locais = localDAO.listar();
         ObservableList<String> nomesLocais = FXCollections.observableArrayList();
         for (Local l : locais) {
-            nomesLocais.add(l.getNome()); // ou o método correto
+            nomesLocais.add(l.getNome()); 
         }
         comboLocal.setItems(nomesLocais);
     }

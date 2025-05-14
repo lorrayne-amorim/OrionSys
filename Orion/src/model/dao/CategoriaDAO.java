@@ -59,8 +59,7 @@ public class CategoriaDAO {
     }
 
     public boolean remover(Categoria categoria) {
-        try {
-            // Verifica se a categoria está sendo usada em transações
+        try { 
             String sqlVerificaTransacoes = "SELECT COUNT(*) FROM transacao WHERE id_categoria=?";
             PreparedStatement stmtVerificaTransacoes = connection.prepareStatement(sqlVerificaTransacoes);
             stmtVerificaTransacoes.setInt(1, categoria.getIdCategoria());
@@ -69,8 +68,7 @@ public class CategoriaDAO {
                 System.out.println("Categoria associada a transações.");
                 return false;
             }
-
-            // Verifica se está sendo usada em orçamentos (coluna correta: categoria)
+   
             String sqlVerificaOrcamentos = "SELECT COUNT(*) FROM orcamento WHERE id_categoria=?";
             PreparedStatement stmtVerificaOrcamentos = connection.prepareStatement(sqlVerificaOrcamentos);
             stmtVerificaOrcamentos.setInt(1, categoria.getIdCategoria());
@@ -80,7 +78,6 @@ public class CategoriaDAO {
                 return false;
             }
 
-            // Exclui a categoria
             String sqlDelete = "DELETE FROM categoria WHERE id_categoria=?";
             PreparedStatement stmt = connection.prepareStatement(sqlDelete);
             stmt.setInt(1, categoria.getIdCategoria());

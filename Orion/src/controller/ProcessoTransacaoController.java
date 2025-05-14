@@ -147,7 +147,6 @@ public class ProcessoTransacaoController {
 
             dialogStage.showAndWait();
 
-            // 👇 Atualiza saldo após salvar/editar
             if (mainController != null) {
                 mainController.atualizarSaldo();
             }
