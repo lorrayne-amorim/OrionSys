@@ -15,7 +15,7 @@ FROM transacao t
 	JOIN categoria c ON 
 	 t.id_categoria = c.id_categoria 
 	JOIN local_transacao l ON 
-	 t.id_local = l.id 
+	 t.id_local = l.id_local 
 WHERE 
 	 c.tipo = 'despesa' 
 	 AND ( 

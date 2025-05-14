@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom right, #a5d6a7, #388e3c); -fx-padding: 0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProcessoOrcamentoDialogController">
+<AnchorPane fx:id="rootPane" prefHeight="417.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom right, #a5d6a7, #388e3c); -fx-padding: 0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProcessoOrcamentoDialogController">
 
     <children>
         <!-- HEADER -->
@@ -42,30 +42,48 @@
             <font>
                <Font name="System Bold" size="14.0" />
             </font></Label>
-            <TextField fx:id="txtValorLimite" prefWidth="200" style="-fx-background-radius: 4; -fx-border-radius: 4; -fx-padding: 4;" />
+            <TextField fx:id="txtValorLimite" prefHeight="25.0" prefWidth="344.0" style="-fx-background-radius: 4; -fx-border-radius: 4; -fx-padding: 4;" />
         </HBox>
 
         <!-- Período Início -->
         <HBox alignment="CENTER_LEFT" layoutX="20" layoutY="200" spacing="10">
-            <Label style="-fx-min-width: 130;" text="Início:" textFill="WHITE">
+            <Label minWidth="63.0" prefHeight="20.0" prefWidth="63.0" style="-fx-min-width: 130;" text="Início:" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
             </font></Label>
-            <DatePicker fx:id="dataInicio" prefWidth="200" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
+            <DatePicker fx:id="dataInicio" prefHeight="25.0" prefWidth="125.0" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
         </HBox>
 
         <!-- Período Fim -->
-        <HBox alignment="CENTER_LEFT" layoutX="20" layoutY="240" spacing="10">
-            <Label style="-fx-min-width: 130;" text="Fim:" textFill="WHITE">
-            <font>
-               <Font name="System Bold" size="14.0" />
-            </font></Label>
-            <DatePicker fx:id="dataFim" prefWidth="200" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
-        </HBox>
+        <HBox alignment="CENTER_LEFT" layoutX="20" layoutY="240" spacing="10" />
 
         <!-- Ações -->
         <HBox alignment="CENTER_RIGHT" layoutX="360" layoutY="340" spacing="10" />
-         <Button layoutX="430.0" layoutY="288.0" onAction="#handleCancelar" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Cancelar" />
-         <Button layoutX="339.0" layoutY="288.0" onAction="#handleConfirmar" style="-fx-background-color: #1b5e20; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Salvar" />
+         <Button layoutX="428.0" layoutY="349.0" onAction="#handleCancelar" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 2; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Cancelar" />
+         <Button layoutX="337.0" layoutY="349.0" onAction="#handleConfirmar" style="-fx-background-color: #1b5e20; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Salvar" />
+         <DatePicker fx:id="dataFim" layoutX="360.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
+         <Label layoutX="301.0" layoutY="203.0" minWidth="80.0" prefHeight="20.0" prefWidth="168.0" style="-fx-min-width: 130;" text="Fim:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboTipoOrcamento" layoutX="161.0" layoutY="235.0" prefWidth="350" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
+      <Label layoutX="20.0" layoutY="243.0" style="-fx-min-width: 130;" text="Tipo de Orçamento:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboStatus" layoutX="162.0" layoutY="275.0" prefWidth="350" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
+      <Label layoutX="18.0" layoutY="278.0" style="-fx-min-width: 130;" text="Status do Orçamento:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboFormaPagamento" layoutX="224.0" layoutY="315.0" prefHeight="25.0" prefWidth="288.0" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
+      <Label layoutX="18.0" layoutY="318.0" style="-fx-min-width: 130;" text="Forma de Pagamento Prevista:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

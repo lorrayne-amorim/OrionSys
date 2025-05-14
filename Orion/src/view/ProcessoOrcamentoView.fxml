@@ -33,37 +33,47 @@
                     <children>
                         <Label layoutX="20" layoutY="20" style="-fx-text-fill: #1b5e20; -fx-font-size: 16px; -fx-font-family: 'Segoe UI Semibold';" text="Detalhes do Orçamento" />
 
-                        <GridPane hgap="10" layoutX="20" layoutY="60" prefHeight="220" prefWidth="584" vgap="10">
+                        <GridPane hgap="10" layoutX="20" layoutY="60" prefHeight="259.0" prefWidth="584" vgap="10">
                             <columnConstraints>
                                 <ColumnConstraints prefWidth="150" />
                                 <ColumnConstraints prefWidth="434" />
                             </columnConstraints>
                             <rowConstraints>
-                                <RowConstraints prefHeight="30" />
-                                <RowConstraints prefHeight="30" />
-                                <RowConstraints prefHeight="30" />
-                                <RowConstraints prefHeight="30" />
-                                <RowConstraints prefHeight="30" />
+                                <RowConstraints prefHeight="30.0" />
+                                <RowConstraints prefHeight="30.0" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                <RowConstraints prefHeight="30.0" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                <RowConstraints prefHeight="30.0" />
+                                <RowConstraints prefHeight="30.0" />
+                        <RowConstraints prefHeight="30.0" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" />
                             </rowConstraints>
                             <children>
-                                <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Título:" GridPane.rowIndex="0" />
-                                <Label fx:id="labelTitulo" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Título:" />
+                                <Label fx:id="labelTitulo" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" />
 
                                 <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Categoria:" GridPane.rowIndex="1" />
                                 <Label fx:id="labelCategoria" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                                <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Valor Limite:" GridPane.rowIndex="2" />
-                                <Label fx:id="labelValorLimite" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Valor Limite:" GridPane.rowIndex="3" />
+                                <Label fx:id="labelValorLimite" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Forma de Pagamento:" GridPane.rowIndex="4" />
+                        <Label fx:id="labelFormaPagamento" prefHeight="20.0" prefWidth="85.0" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-                                <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Data Início:" GridPane.rowIndex="3" />
-                                <Label fx:id="labelDataInicio" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Data Início:" GridPane.rowIndex="5" />
+                                <Label fx:id="labelDataInicio" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-                                <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Data Fim:" GridPane.rowIndex="4" />
-                                <Label fx:id="labelDataFim" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Data Fim:" GridPane.rowIndex="6" />
+                                <Label fx:id="labelDataFim" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Tipo:" GridPane.rowIndex="2" />
+                        <Label fx:id="labelTipo" prefHeight="20.0" prefWidth="75.0" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label style="-fx-text-fill: #1b5e20; -fx-font-size: 14px;" text="Status" GridPane.rowIndex="7" />
+                        <Label fx:id="labelStatus" prefHeight="20.0" prefWidth="85.0" style="-fx-text-fill: #388e3c; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                             </children>
                         </GridPane>
 
-                        <HBox alignment="CENTER_LEFT" layoutX="20" layoutY="300" spacing="10">
+                        <HBox alignment="CENTER_LEFT" layoutX="144.0" layoutY="352.0" spacing="10">
                             <Button fx:id="buttonInserir" onAction="#handleInserir" style="-fx-background-color: #388e3c; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 100px; -fx-pref-height: 30px;" text="Inserir" />
                             <Button fx:id="buttonAlterar" onAction="#handleAlterar" style="-fx-background-color: #388e3c; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 100px; -fx-pref-height: 30px;" text="Alterar" />
                             <Button fx:id="buttonRemover" onAction="#handleRemover" style="-fx-background-color: #d32f2f; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 100px; -fx-pref-height: 30px;" text="Remover" />

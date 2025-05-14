@@ -21,26 +21,32 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import model.dao.FormaPagamentoDAO;
+import model.dao.LocalDAO;
+import model.domain.FormaPagamento;
+import model.domain.Local;
 
 public class InserirProcessoTransacaoController {
 
-    @FXML 
+    @FXML
     private ComboBox<Categoria> comboCategoria;
-    
-    @FXML 
+
+    @FXML
     private ComboBox<String> comboLocal;
-    
-    @FXML 
+
+    @FXML
     private ComboBox<String> comboFormaPagamento;
-    
-    @FXML 
+
+    @FXML
     private TextField txtValor;
-    
-    @FXML 
+
+    @FXML
     private DatePicker datePicker;
 
     private TransacaoDAO transacaoDAO = new TransacaoDAO();
     private CategoriaDAO categoriaDAO = new CategoriaDAO();
+    private LocalDAO localDAO = new LocalDAO();
+    private FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO();
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
     private Database database = DatabaseFactory.getDatabase("postgresql");
     private Connection connection = database.conectar();
@@ -64,31 +70,21 @@ public class InserirProcessoTransacaoController {
     }
 
     private void carregarFormasPagamento() {
-        ObservableList<String> formas = FXCollections.observableArrayList();
-        String sql = "SELECT descricao FROM forma_pagamento ORDER BY descricao";
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                formas.add(rs.getString("descricao"));
-            }
-            comboFormaPagamento.setItems(formas);
-        } catch (SQLException e) {
-            mostrarAlerta("Erro ao carregar formas de pagamento: " + e.getMessage());
+        List<FormaPagamento> formaPagamentos = formaPagamentoDAO.listar();
+        ObservableList<String> nomesForma = FXCollections.observableArrayList();
+        for (FormaPagamento f : formaPagamentos) {
+            nomesForma.add(f.getDescricao()); // ou o método correto que retorna o nome
         }
+        comboFormaPagamento.setItems(nomesForma);
     }
 
     private void carregarLocais() {
-        ObservableList<String> locais = FXCollections.observableArrayList();
-        String sql = "SELECT nome FROM local_transacao ORDER BY nome";
-        try (PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
-            while (rs.next()) {
-                locais.add(rs.getString("nome"));
-            }
-            comboLocal.setItems(locais);
-        } catch (SQLException e) {
-            mostrarAlerta("Erro ao carregar locais: " + e.getMessage());
+        List<Local> locais = localDAO.listar();
+        ObservableList<String> nomesLocais = FXCollections.observableArrayList();
+        for (Local l : locais) {
+            nomesLocais.add(l.getNome()); // ou o método correto
         }
+        comboLocal.setItems(nomesLocais);
     }
 
     public void preencherFormulario(Transacao transacao) {
@@ -114,7 +110,8 @@ public class InserirProcessoTransacaoController {
             String valorStr = txtValor.getText().replace(",", ".");
             LocalDateTime data = datePicker.getValue().atStartOfDay();
 
-            if (categoria == null || nomeLocal == null || formaPagamento == null || valorStr.isEmpty() || data == null) {
+            if (categoria == null || nomeLocal == null || formaPagamento == null || valorStr.isEmpty()
+                    || data == null) {
                 mostrarAlerta("Todos os campos devem ser preenchidos.");
                 return;
             }
@@ -135,9 +132,9 @@ public class InserirProcessoTransacaoController {
             transacao.setIdUsuario(idUsuarioLogado);
 
             if (categoria.getTipo().equalsIgnoreCase("despesa")
-                && (formaPagamento.equalsIgnoreCase("avista") ||
-                    formaPagamento.equalsIgnoreCase("pix") ||
-                    formaPagamento.equalsIgnoreCase("transferência"))) {
+                    && (formaPagamento.equalsIgnoreCase("avista") ||
+                            formaPagamento.equalsIgnoreCase("pix") ||
+                            formaPagamento.equalsIgnoreCase("transferência"))) {
 
                 BigDecimal saldo = usuarioDAO.buscarSaldoPorId(idUsuarioLogado);
                 if (saldo == null || saldo.compareTo(valor) < 0) {
@@ -178,11 +175,12 @@ public class InserirProcessoTransacaoController {
     }
 
     private int buscarIdLocalPorNome(String nome) {
-        String sql = "SELECT id FROM local_transacao WHERE nome = ?";
+        String sql = "SELECT id_local FROM local_transacao WHERE nome = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, nome);
             ResultSet rs = stmt.executeQuery();
-            if (rs.next()) return rs.getInt("id");
+            if (rs.next())
+                return rs.getInt("id_local");
         } catch (SQLException e) {
             mostrarAlerta("Erro ao buscar local: " + e.getMessage());
         }

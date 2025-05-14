@@ -1,5 +1,5 @@
 package controller;
-// @author Lorrayne
+// @author Julia
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -100,17 +100,7 @@ public class RelatorioTransacoesPeriodoController {
         URL url = getClass().getResource("/relatorios/RelatorioTransacoes.jasper");
         JasperReport report = (JasperReport) JRLoader.loadObject(url);
 
-        // Mapa de parâmetros
-        Map<String, Object> parametros = new HashMap<>();
-        if (dataInicio.getValue() != null) {
-            // converte LocalDate → java.sql.Date
-            parametros.put("dataInicio", java.sql.Date.valueOf(dataInicio.getValue()));
-        }
-        if (dataFim.getValue() != null) {
-            parametros.put("dataFim", java.sql.Date.valueOf(dataFim.getValue()));
-        }
-
-        JasperPrint print = JasperFillManager.fillReport(report, parametros, connection);
+        JasperPrint print = JasperFillManager.fillReport(report,null, connection);
         JasperViewer viewer = new JasperViewer(print, false);
         viewer.setVisible(true);
 }
@@ -127,12 +117,8 @@ public class RelatorioTransacoesPeriodoController {
         java.time.LocalDate inicio = dataInicio.getValue();
         java.time.LocalDate fim = dataFim.getValue();
 
-        if (inicio != null && fim != null) {
-            listTransacao = transacaoDAO.listarPorPeriodo(inicio, fim);
-        } else {
-            listTransacao = transacaoDAO.listarTodos();
-        }
-
+        listTransacao = transacaoDAO.listarTodos();
+        
         observableListTransacoes = FXCollections.observableArrayList(listTransacao);
         tabelaTransacoes.setItems(observableListTransacoes);
     }

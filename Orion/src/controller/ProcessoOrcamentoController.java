@@ -1,13 +1,9 @@
 package controller;
 
-// @author Julia
-
-import model.dao.OrcamentoDAO;
-import model.dao.CategoriaDAO;
+import model.dao.*;
 import model.database.Database;
 import model.database.DatabaseFactory;
-import model.domain.Categoria;
-import java.util.Optional;
+import model.domain.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,15 +14,17 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.domain.Orcamento;
-import java.sql.Connection;
+
 import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import javafx.fxml.Initializable;
-import java.util.ResourceBundle;
 import java.net.URL;
+import java.sql.Connection;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javafx.fxml.Initializable;
 
 public class ProcessoOrcamentoController implements Initializable {
 
@@ -39,18 +37,29 @@ public class ProcessoOrcamentoController implements Initializable {
     @FXML private Label labelValorLimite;
     @FXML private Label labelDataInicio;
     @FXML private Label labelDataFim;
+    @FXML private Label labelTipo;
+    @FXML private Label labelStatus;
+    @FXML private Label labelFormaPagamento;
 
-    private OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-    private CategoriaDAO categoriaDAO = new CategoriaDAO();
+    private final OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+    private final CategoriaDAO categoriaDAO = new CategoriaDAO();
+    private final TipoOrcamentoDAO tipoOrcamentoDAO = new TipoOrcamentoDAO();
+    private final StatusOrcamentoDAO statusOrcamentoDAO = new StatusOrcamentoDAO();
+    private final FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO();
+
     private ObservableList<Orcamento> listaOrcamentos;
 
-    private Database database = DatabaseFactory.getDatabase("postgresql");
-    private Connection connection = database.conectar();
+    private final Database database = DatabaseFactory.getDatabase("postgresql");
+    private final Connection connection = database.conectar();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         orcamentoDAO.setConnection(connection);
         categoriaDAO.setConnection(connection);
+        tipoOrcamentoDAO.setConnection(connection);
+        statusOrcamentoDAO.setConnection(connection);
+        formaPagamentoDAO.setConnection(connection);
+
         carregarTabela();
 
         colTitulo.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTitulo()));
@@ -77,17 +86,27 @@ public class ProcessoOrcamentoController implements Initializable {
     private void mostrarDetalhesOrcamento(Orcamento orcamento) {
         if (orcamento != null) {
             Categoria categoria = categoriaDAO.buscar(orcamento.getIdCategoria());
+            TipoOrcamento tipo = tipoOrcamentoDAO.buscar(orcamento.getIdTipoOrcamento());
+            StatusOrcamento status = statusOrcamentoDAO.buscar(orcamento.getIdStatusOrcamento());
+            FormaPagamento forma = formaPagamentoDAO.buscar(orcamento.getIdFormaPagamento());
+
             labelTitulo.setText(orcamento.getTitulo());
             labelCategoria.setText(categoria != null ? categoria.getNome() : "Desconhecida");
             labelValorLimite.setText(String.format("R$ %.2f", orcamento.getValorLimite()));
             labelDataInicio.setText(orcamento.getDataInicio().toString());
             labelDataFim.setText(orcamento.getDataFim().toString());
+            labelTipo.setText(tipo != null ? tipo.getDescricao() : "-");
+            labelStatus.setText(status != null ? status.getDescricao() : "-");
+            labelFormaPagamento.setText(forma != null ? forma.getDescricao() : "-");
         } else {
             labelTitulo.setText("");
             labelCategoria.setText("");
             labelValorLimite.setText("");
             labelDataInicio.setText("");
             labelDataFim.setText("");
+            labelTipo.setText("");
+            labelStatus.setText("");
+            labelFormaPagamento.setText("");
         }
     }
 
@@ -144,7 +163,7 @@ public class ProcessoOrcamentoController implements Initializable {
 
             ProcessoOrcamentoDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setOrcamento(orcamento); 
+            controller.setOrcamento(orcamento);
 
             dialogStage.showAndWait();
             return controller.isConfirmado();

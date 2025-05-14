@@ -1,33 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" prefHeight="605.0" prefWidth="1024.0" style="-fx-background-color: linear-gradient(to bottom right, #a5d6a7, #388e3c); -fx-padding: 0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RelatorioTransacoesPeriodoController">
     <children>
 
         <!-- FILTROS e AÇÕES -->
-        <HBox layoutX="20.0" layoutY="32.0" spacing="10">
-            <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-min-width: 50;" text="Início:" textFill="WHITE">
-            <font>
-               <Font name="Arial" size="18.0" />
-            </font></Label>
-            <DatePicker fx:id="dataInicio" prefWidth="150" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
-
-            <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-min-width: 30;" text="Fim:" textFill="WHITE">
-            <font>
-               <Font name="Arial" size="18.0" />
-            </font></Label>
-            <DatePicker fx:id="dataFim" prefWidth="150" style="-fx-background-radius: 4; -fx-border-radius: 4;" />
-
-            <Button fx:id="btnBuscar" onAction="#handleBuscar" style="-fx-background-color: #1b5e20; -fx-text-fill: white; -fx-background-radius: 4; -fx-pref-width: 80px; -fx-pref-height: 30px;" text="Buscar" />
-        </HBox>
+        <HBox layoutX="20.0" layoutY="32.0" spacing="10" />
 
         <!-- TABELA DE RESULTADOS -->
         <TableView fx:id="tabelaTransacoes" layoutX="24.0" layoutY="75.0" prefHeight="490" prefWidth="976.0" style="-fx-background-color: white; -fx-border-color: #388e3c; -fx-border-width: 2;">

@@ -62,7 +62,7 @@ public class TelaInicialController {
                 Parent root = loader.load();
 
                 VBoxMainController controller = loader.getController();
-                controller.setIdUsuarioLogado(usuario.getIdUsuario()); // 👈 ESSENCIAL
+                controller.setIdUsuarioLogado(usuario.getIdUsuario()); 
 
                 Stage stage = (Stage) btnEntrar.getScene().getWindow();
                 stage.setScene(new Scene(root));
