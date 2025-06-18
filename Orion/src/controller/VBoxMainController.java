@@ -40,6 +40,9 @@ public class VBoxMainController implements Initializable {
     @FXML
     private MenuItem menuItemRelatorioDespesas;
     private int idUsuarioLogado;
+    
+    @FXML
+    private MenuItem menuItemLog;
 
     @FXML
     private AnchorPane anchorPane;
@@ -55,6 +58,17 @@ public class VBoxMainController implements Initializable {
         anchorPane.getChildren().setAll(a);
     }
 
+    @FXML
+    public void handleMenuItemLog() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ClienteSistemaGruposFXML.fxml"));
+        AnchorPane a = loader.load();
+        
+        
+      
+        
+       anchorPane.getChildren().setAll(a);
+    }
+    
     @FXML
     public void handleMenuItemDespesasPorCategoria() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/GraficoPizzaDespesaCategoriaView.fxml"));
@@ -104,6 +118,8 @@ public class VBoxMainController implements Initializable {
         anchorPane.getChildren().setAll(b);
     }
 
+  
+    
     public void atualizarSaldo() {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         BigDecimal saldo = usuarioDAO.buscarSaldoPorId(idUsuarioLogado);

@@ -53,6 +53,11 @@
                         <MenuItem fx:id="menuItemDespesasPorCategoria" onAction="#handleMenuItemDespesasPorCategoria" style="-fx-text-fill: #1b5e20;" text="Despesas por Categoria" />
                     </items>
                 </Menu>
+            <Menu style="-fx-text-fill: #1b5e20;" text="Thread - Sockets">
+               <items>
+                  <MenuItem fx:id="menuItemLog" onAction="#handleMenuItemLog" style="-fx-text-fill: #1b5e20;" text="Sistema de Grupos - Log" />
+               </items>
+            </Menu>
             </menus>
         </MenuBar>
 
