@@ -1,12 +1,12 @@
-package cliente;
+package sockets.thread;
 
 import java.io.Serializable;
 
 public class ContadorGrupo implements Serializable {
+    private static final long serialVersionUID = 3347940124083144848L;
     private int idGrupo;           // ID do grupo (1-10)
     private String nomeGrupo;      // Nome do grupo
     private int quantidadeUtilizacoes; // Contador de utilizações
-    
     // Construtor padrão obrigatório para serialização
     public ContadorGrupo() {}
     

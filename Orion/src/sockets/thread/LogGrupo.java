@@ -1,11 +1,13 @@
-package cliente;
+package sockets.thread;
 
 import java.io.Serializable;
 
 public class LogGrupo implements Serializable {
+    private static final long serialVersionUID = 908656780954487901L;
     private int idGrupo;      // ID do grupo (1-10)
     private String timestamp; // Data/hora no formato "yyyy-MM-dd HH:mm:ss"
-    
+   
+
     // Construtor padrão obrigatório para serialização
     public LogGrupo() {}
     

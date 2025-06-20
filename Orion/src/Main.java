@@ -1,3 +1,10 @@
+import sockets.thread.ContadorGrupo;
+import sockets.thread.LogGrupo;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +25,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+
         launch(args);
     }
+  
 }

@@ -62,10 +62,7 @@ public class VBoxMainController implements Initializable {
     public void handleMenuItemLog() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ClienteSistemaGruposFXML.fxml"));
         AnchorPane a = loader.load();
-        
-        
-      
-        
+     
        anchorPane.getChildren().setAll(a);
     }
     
